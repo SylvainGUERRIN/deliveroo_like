@@ -3,6 +3,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,19 @@ class City
      * @ORM\Column(type="integer")
      */
     private $zipCode;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Address", mappedBy="city")
+     */
+    private $addresses;
+
+    /**
+     * City constructor.
+     */
+    public function __construct()
+    {
+        $this->addresses = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -71,5 +86,42 @@ class City
         return $this;
     }
 
+    /**
+     * @return Collection|Address[]
+     */
+    public function getAddresses(): Collection
+    {
+        return $this->addresses;
+    }
 
+    /**
+     * @param Address $address
+     * @return $this
+     */
+    public function addAddress(Address $address): self
+    {
+        if (!$this->addresses->contains($address)) {
+            $this->addresses[] = $address;
+            $address->setCity($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Address $address
+     * @return $this
+     */
+    public function removeAddress(Address $address): self
+    {
+        if ($this->addresses->contains($address)) {
+            $this->addresses->removeElement($address);
+            // set the owning side to null (unless already changed)
+            if ($address->getCity() === $this) {
+                $address->setCity(null);
+            }
+        }
+
+        return $this;
+    }
 }

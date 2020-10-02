@@ -3,6 +3,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -54,6 +56,24 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="json")
      */
     private $role = [];
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gender", inversedBy="users")
+     */
+    private $gender;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Address", inversedBy="users")
+     */
+    private $addresses;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->addresses = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -169,6 +189,59 @@ class User implements UserInterface, \Serializable
     {
         $this->role = $role;
         return  $this;
+    }
+
+    /**
+     * @return Gender|null
+     */
+    public function getGender(): ?Gender
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param Gender|null $gender
+     * @return $this
+     */
+    public function setGender(?Gender $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Address[]
+     */
+    public function getAddresses(): Collection
+    {
+        return $this->addresses;
+    }
+
+    /**
+     * @param Address $address
+     * @return $this
+     */
+    public function addAddress(Address $address): self
+    {
+        if (!$this->addresses->contains($address)) {
+            $this->addresses[] = $address;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Address $address
+     * @return $this
+     */
+    public function removeAddress(Address $address): self
+    {
+        if ($this->addresses->contains($address)) {
+            $this->addresses->removeElement($address);
+        }
+
+        return $this;
     }
 
     /**

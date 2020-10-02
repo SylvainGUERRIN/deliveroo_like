@@ -1,15 +1,17 @@
 <?php
 
+
 namespace App\Entity;
+
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AddressRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\GenderRepository")
  */
-class Address
+class Gender
 {
     /**
      * @ORM\Id()
@@ -24,25 +26,13 @@ class Address
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $line1;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $line2;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="addresses")
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="gender")
      */
     private $users;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\City", inversedBy="addresses")
+     * Gender constructor.
      */
-    private $city;
-
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -75,42 +65,6 @@ class Address
     }
 
     /**
-     * @return mixed
-     */
-    public function getLine1(): ?string
-    {
-        return $this->line1;
-    }
-
-    /**
-     * @param mixed $line1
-     * @return $this
-     */
-    public function setLine1($line1): self
-    {
-        $this->line1 = $line1;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLine2(): ?string
-    {
-        return $this->line2;
-    }
-
-    /**
-     * @param mixed $line2
-     * @return $this
-     */
-    public function setLine2($line2): self
-    {
-        $this->line2 = $line2;
-        return $this;
-    }
-
-    /**
      * @return Collection|User[]
      */
     public function getUsers(): Collection
@@ -124,11 +78,10 @@ class Address
      */
     public function addUser(User $user): self
     {
-        if (!$this->users->contains($user)) {
+        if(!$this->users->contains($user)){
             $this->users[] = $user;
-            $user->addAddress($this);
+            $user->setGender($this);
         }
-
         return $this;
     }
 
@@ -138,30 +91,21 @@ class Address
      */
     public function removeUser(User $user): self
     {
-        if ($this->users->contains($user)) {
+        if($this->users->contains($user)){
             $this->users->removeElement($user);
-            $user->removeAddress($this);
+            // set the owning side to null (unless already changed)
+            if($user->getGender() === $this){
+                $user->setGender(null);
+            }
         }
-
         return $this;
     }
 
     /**
-     * @return City|null
+     * @return string
      */
-    public function getCity(): ?City
+    public function __toString()
     {
-        return $this->city;
-    }
-
-    /**
-     * @param City|null $city
-     * @return $this
-     */
-    public function setCity(?City $city): self
-    {
-        $this->city = $city;
-
-        return $this;
+        return (string) $this->name;
     }
 }
