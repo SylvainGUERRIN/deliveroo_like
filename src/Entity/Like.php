@@ -7,9 +7,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\DisLikeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LikeRepository")
+ * @ORM\Table(name="`like`")
  */
-class DisLike
+class Like
 {
     /**
      * @ORM\Id()
@@ -21,15 +22,15 @@ class DisLike
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $disliked_at;
+    private $liked_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="disLikes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="likes")
      */
     private $user;
 
     /**
-     * @return mixed
+     * @return int|null
      */
     public function getId(): ?int
     {
@@ -37,20 +38,21 @@ class DisLike
     }
 
     /**
-     * @return mixed
+     * @return \DateTimeInterface|null
      */
-    public function getDislikedAt(): ?\DateTimeInterface
+    public function getLikedAt(): ?\DateTimeInterface
     {
-        return $this->disliked_at;
+        return $this->liked_at;
     }
 
     /**
-     * @param mixed $disliked_at
+     * @param \DateTimeInterface|null $liked_at
      * @return $this
      */
-    public function setDislikedAt(\DateTimeInterface $disliked_at): self
+    public function setLikedAt(?\DateTimeInterface $liked_at): self
     {
-        $this->disliked_at = $disliked_at;
+        $this->liked_at = $liked_at;
+
         return $this;
     }
 

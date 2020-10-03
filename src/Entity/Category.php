@@ -6,6 +6,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ */
 class Category
 {
     /**
@@ -19,6 +22,19 @@ class Category
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Image", inversedBy="categories")
+     */
+    private $image;
+
+    /**
+     * @return mixed
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     /**
      * @return mixed
@@ -39,10 +55,28 @@ class Category
     }
 
     /**
-     * @return mixed
+     * @return Image|null
      */
-    public function getId(): ?int
+    public function getImage(): ?Image
     {
-        return $this->id;
+        return $this->image;
+    }
+
+    /**
+     * @param Image|null $image
+     * @return $this
+     */
+    public function setImage(?Image $image): self
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->name;
     }
 }

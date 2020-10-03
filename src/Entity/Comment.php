@@ -28,6 +28,11 @@ class Comment
     private $commentedAt;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     */
+    private $commentedBy;
+
+    /**
      * @return mixed
      */
     public function getId(): ?int
@@ -71,5 +76,22 @@ class Comment
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
+    public function getCommentedBy(): ?User
+    {
+        return $this->commentedBy;
+    }
 
+    /**
+     * @param User|null $commentedBy
+     * @return $this
+     */
+    public function setCommentedBy(?User $commentedBy): self
+    {
+        $this->commentedBy = $commentedBy;
+
+        return $this;
+    }
 }

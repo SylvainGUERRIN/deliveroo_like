@@ -68,11 +68,34 @@ class User implements UserInterface, \Serializable
     private $addresses;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="commentedBy")
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DisLike", mappedBy="user")
+     */
+    private $disLikes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Like", mappedBy="user")
+     */
+    private $likes;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Image", inversedBy="users")
+     */
+    private $image;
+
+    /**
      * User constructor.
      */
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->disLikes = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     /**
@@ -206,7 +229,6 @@ class User implements UserInterface, \Serializable
     public function setGender(?Gender $gender): self
     {
         $this->gender = $gender;
-
         return $this;
     }
 
@@ -227,7 +249,6 @@ class User implements UserInterface, \Serializable
         if (!$this->addresses->contains($address)) {
             $this->addresses[] = $address;
         }
-
         return $this;
     }
 
@@ -240,7 +261,135 @@ class User implements UserInterface, \Serializable
         if ($this->addresses->contains($address)) {
             $this->addresses->removeElement($address);
         }
+        return $this;
+    }
 
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setCommentedBy($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getCommentedBy() === $this) {
+                $comment->setCommentedBy(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|DisLike[]
+     */
+    public function getDisLikes(): Collection
+    {
+        return $this->disLikes;
+    }
+
+    /**
+     * @param DisLike $disLike
+     * @return $this
+     */
+    public function addDisLike(DisLike $disLike): self
+    {
+        if (!$this->disLikes->contains($disLike)) {
+            $this->disLikes[] = $disLike;
+            $disLike->setUser($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param DisLike $disLike
+     * @return $this
+     */
+    public function removeDisLike(DisLike $disLike): self
+    {
+        if ($this->disLikes->contains($disLike)) {
+            $this->disLikes->removeElement($disLike);
+            // set the owning side to null (unless already changed)
+            if ($disLike->getUser() === $this) {
+                $disLike->setUser(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Like[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    /**
+     * @param Like $like
+     * @return $this
+     */
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setUser($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Like $like
+     * @return $this
+     */
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
+            // set the owning side to null (unless already changed)
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Image|null
+     */
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param Image|null $image
+     * @return $this
+     */
+    public function setImage(?Image $image): self
+    {
+        $this->image = $image;
         return $this;
     }
 
