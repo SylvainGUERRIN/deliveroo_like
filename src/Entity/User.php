@@ -88,6 +88,11 @@ class User implements UserInterface, \Serializable
     private $image;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Cart", mappedBy="consumer", cascade={"persist", "remove"})
+     */
+    private $cart;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -390,6 +395,29 @@ class User implements UserInterface, \Serializable
     public function setImage(?Image $image): self
     {
         $this->image = $image;
+        return $this;
+    }
+
+    /**
+     * @return Cart|null
+     */
+    public function getCart(): ?Cart
+    {
+        return $this->cart;
+    }
+
+    /**
+     * @param Cart|null $cart
+     * @return $this
+     */
+    public function setCart(?Cart $cart): self
+    {
+        $this->cart = $cart;
+        // set (or unset) the owning side of the relation if necessary
+        $newConsumer = null === $cart ? null : $this;
+        if ($cart->getConsumer() !== $newConsumer) {
+            $cart->setConsumer($newConsumer);
+        }
         return $this;
     }
 
