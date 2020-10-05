@@ -4,6 +4,8 @@
 namespace App\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,6 +29,19 @@ class Category
      * @ORM\ManyToOne(targetEntity="App\Entity\Image", inversedBy="categories")
      */
     private $image;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Menu", mappedBy="category")
+     */
+    private $menus;
+
+    /**
+     * Category constructor.
+     */
+    public function __construct()
+    {
+        $this->menus = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -69,6 +84,44 @@ class Category
     public function setImage(?Image $image): self
     {
         $this->image = $image;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Menu[]
+     */
+    public function getMenus(): Collection
+    {
+        return $this->menus;
+    }
+
+    /**
+     * @param Menu $menu
+     * @return $this
+     */
+    public function addMenu(Menu $menu): self
+    {
+        if (!$this->menus->contains($menu)) {
+            $this->menus[] = $menu;
+            $menu->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Menu $menu
+     * @return $this
+     */
+    public function removeMenu(Menu $menu): self
+    {
+        if ($this->menus->contains($menu)) {
+            $this->menus->removeElement($menu);
+            // set the owning side to null (unless already changed)
+            if ($menu->getCategory() === $this) {
+                $menu->setCategory(null);
+            }
+        }
         return $this;
     }
 

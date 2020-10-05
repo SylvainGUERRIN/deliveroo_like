@@ -29,6 +29,11 @@ class CartItem
     private $cart;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Menu", inversedBy="cartItems")
+     */
+    private $menu;
+
+    /**
      * @return mixed
      */
     public function getId(): ?int
@@ -69,6 +74,24 @@ class CartItem
     public function setCart(?Cart $cart): self
     {
         $this->cart = $cart;
+        return $this;
+    }
+
+    /**
+     * @return Menu|null
+     */
+    public function getMenu(): ?Menu
+    {
+        return $this->menu;
+    }
+
+    /**
+     * @param Menu|null $menu
+     * @return $this
+     */
+    public function setMenu(?Menu $menu): self
+    {
+        $this->menu = $menu;
         return $this;
     }
 }

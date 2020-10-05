@@ -3,6 +3,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +32,11 @@ class Comment
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
      */
     private $commentedBy;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Menu", inversedBy="comments")
+     */
+    private $targetMenu;
 
     /**
      * @return mixed
@@ -92,6 +98,38 @@ class Comment
     {
         $this->commentedBy = $commentedBy;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection|Menu[]
+     */
+    public function getTargetMenu(): Collection
+    {
+        return $this->targetMenu;
+    }
+
+    /**
+     * @param Menu $targetMenu
+     * @return $this
+     */
+    public function addTargetMenu(Menu $targetMenu): self
+    {
+        if (!$this->targetMenu->contains($targetMenu)) {
+            $this->targetMenu[] = $targetMenu;
+        }
+        return $this;
+    }
+
+    /**
+     * @param Menu $targetMenu
+     * @return $this
+     */
+    public function removeTargetMenu(Menu $targetMenu): self
+    {
+        if ($this->targetMenu->contains($targetMenu)) {
+            $this->targetMenu->removeElement($targetMenu);
+        }
         return $this;
     }
 }

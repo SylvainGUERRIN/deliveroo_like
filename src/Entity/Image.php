@@ -39,12 +39,18 @@ class Image
     private $categories;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Menu", mappedBy="image")
+     */
+    private $menus;
+
+    /**
      * Image constructor.
      */
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->menus = new ArrayCollection();
     }
 
     /**
@@ -160,6 +166,43 @@ class Image
             // set the owning side to null (unless already changed)
             if ($category->getImage() === $this) {
                 $category->setImage(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Menu[]
+     */
+    public function getMenus(): Collection
+    {
+        return $this->menus;
+    }
+
+    /**
+     * @param Menu $menu
+     * @return $this
+     */
+    public function addMenu(Menu $menu): self
+    {
+        if (!$this->menus->contains($menu)) {
+            $this->menus[] = $menu;
+            $menu->setImage($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Menu $menu
+     * @return $this
+     */
+    public function removeMenu(Menu $menu): self
+    {
+        if ($this->menus->contains($menu)) {
+            $this->menus->removeElement($menu);
+            // set the owning side to null (unless already changed)
+            if ($menu->getImage() === $this) {
+                $menu->setImage(null);
             }
         }
         return $this;
