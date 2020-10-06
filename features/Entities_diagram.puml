@@ -1,0 +1,96 @@
+@startuml
+'Alice -> Bob: Authentication Request
+'Bob --> Alice: Authentication Response
+'
+'Alice -> Bob: Another authentication Request
+'Alice <-- Bob: another authentication Response
+
+package "Entities" #FFF {
+    class User {
+        {field} id: int
+        {field} firstname: string
+        {field} lastname: string
+        {field} email: string
+        {field} password: string
+        {field} createdAt: DateTimeInterface
+        {field} gender: relation
+        {field} addresses: relation
+        {field} comments: relation
+        {field} dislikes: relation
+        {field} likes: relation
+    }
+    class Address {
+        {field} id: int
+        {field} line1: int
+        {field} line2: int
+        {field} city: relation
+    }
+    class Cart {
+        {field} id: int
+        {field} consumer: relation
+        {field} cartItems: relation
+    }
+    class CartItem {
+        {field} id: int
+        {field} quantity: int
+    }
+    class Category {
+        {field} id: int
+        {field} name: string
+    }
+    class City {
+        {field} id: int
+        {field} name: string
+        {field} zipCode: string
+    }
+    class Comment {
+        {field} id: int
+        {field} content: text
+        {field} commentedAt: dateTimeInterface
+    }
+    class DisLike {
+        {field} id: int
+        {field} dislikeAt: dateTimeInterface
+    }
+    class Gender {
+        {field} id: int
+        {field} name: string
+    }
+    class Image {
+        {field} id: int
+        {field} title: string
+        {field} url: string
+        {field} users: relation
+        {field} categories: relation
+    }
+    class Like {
+        {field} id: int
+        {field} likeAt: dateTimeInterface
+    }
+    class Menu {
+        {field} id: int
+        {field} name: string
+        {field} description: text
+        {field} price: float
+        {field} cartItems: relation
+        {field} category: relation
+    }
+
+    User "Many" --* "One" Gender : To
+    User "Many" --* "Many" Address : To
+    User "One" --* "Many" Comment : To
+    User "One" --* "Many" DisLike : To
+    User "One" --* "Many" Like : To
+
+    Address "Many" --* "One" City : To
+
+    Cart "One" --* "One" User : To
+    Cart "One" --* "Many" CartItem : To
+
+    Image "Many" --* "One" User : To
+    Image "Many" --* "One" Category : To
+
+    Menu "One" --* "Many" CartItem : To
+    Menu "Many" --* "One" Category : To
+}
+@enduml
