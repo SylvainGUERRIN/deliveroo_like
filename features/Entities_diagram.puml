@@ -92,5 +92,7 @@ package "Entities" #FFF {
 
     Menu "One" --* "Many" CartItem : To
     Menu "Many" --* "One" Category : To
+    Menu "Many" --* "Many" Comment : To
+    Menu "Many" --* "One" Image : To
 }
 @enduml

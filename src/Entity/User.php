@@ -93,6 +93,11 @@ class User implements UserInterface, \Serializable
     private $cart;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="consumer")
+     */
+    private $orders;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -101,6 +106,7 @@ class User implements UserInterface, \Serializable
         $this->comments = new ArrayCollection();
         $this->disLikes = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     /**
@@ -417,6 +423,43 @@ class User implements UserInterface, \Serializable
         $newConsumer = null === $cart ? null : $this;
         if ($cart->getConsumer() !== $newConsumer) {
             $cart->setConsumer($newConsumer);
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Order[]
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    /**
+     * @param Order $order
+     * @return $this
+     */
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setConsumer($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Order $order
+     * @return $this
+     */
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->contains($order)) {
+            $this->orders->removeElement($order);
+            // set the owning side to null (unless already changed)
+            if ($order->getConsumer() === $this) {
+                $order->setConsumer(null);
+            }
         }
         return $this;
     }

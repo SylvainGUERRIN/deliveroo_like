@@ -43,9 +43,15 @@ class Address
      */
     private $city;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="deliveryAddress")
+     */
+    private $orders;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     /**
@@ -162,6 +168,44 @@ class Address
     {
         $this->city = $city;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection|Order[]
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    /**
+     * @param Order $order
+     * @return $this
+     */
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setDeliveryAddress($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Order $order
+     * @return $this
+     */
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->contains($order)) {
+            $this->orders->removeElement($order);
+            // set the owning side to null (unless already changed)
+            if ($order->getDeliveryAddress() === $this) {
+                $order->setDeliveryAddress(null);
+            }
+        }
         return $this;
     }
 }
