@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,17 @@ class Order
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="orders")
      */
     private $consumer;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderMenu", mappedBy="orders")
+     */
+    private $orderMenus;
+
+    public function __construct()
+    {
+//        $this->restaurants = new ArrayCollection();
+        $this->orderMenus = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -137,6 +150,43 @@ class Order
     public function setConsumer(?User $consumer): self
     {
         $this->consumer = $consumer;
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrderMenu[]
+     */
+    public function getOrderMenus(): Collection
+    {
+        return $this->orderMenus;
+    }
+
+    /**
+     * @param OrderMenu $orderMenu
+     * @return $this
+     */
+    public function addOrderMenu(OrderMenu $orderMenu): self
+    {
+        if (!$this->orderMenus->contains($orderMenu)) {
+            $this->orderMenus[] = $orderMenu;
+            $orderMenu->setOrders($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param OrderMenu $orderMenu
+     * @return $this
+     */
+    public function removeOrderMenu(OrderMenu $orderMenu): self
+    {
+        if ($this->orderMenus->contains($orderMenu)) {
+            $this->orderMenus->removeElement($orderMenu);
+            // set the owning side to null (unless already changed)
+            if ($orderMenu->getOrders() === $this) {
+                $orderMenu->setOrders(null);
+            }
+        }
         return $this;
     }
 }

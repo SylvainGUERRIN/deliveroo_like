@@ -13,6 +13,7 @@ package "Entities" #FFF {
         {field} email: string
         {field} password: string
         {field} createdAt: DateTimeInterface
+        {field} role: array
         {field} gender: relation
         {field} addresses: relation
         {field} comments: relation
@@ -75,6 +76,21 @@ package "Entities" #FFF {
         {field} cartItems: relation
         {field} category: relation
     }
+    class Order {
+        {field} id: int
+        {field} orderNumber: string
+        {field} orderedAt: dateTimeInterface
+        {field} totalPrice: float
+        {field} deliveryAddress: relation
+        {field} consumer: relation
+        {field} orderMenus: relation
+    }
+    class OrderMenu {
+        {field} id: int
+        {field} quantity: string
+        {field} orders: relation
+        {field} menu: relation
+    }
 
     User "Many" --* "One" Gender : To
     User "Many" --* "Many" Address : To
@@ -94,5 +110,12 @@ package "Entities" #FFF {
     Menu "Many" --* "One" Category : To
     Menu "Many" --* "Many" Comment : To
     Menu "Many" --* "One" Image : To
+
+    OrderMenu "Many" --* "One" Order : To
+    OrderMenu "Many" --* "One" Menu : To
+
+    Order "Many" --* "One" Address : To
+    Order "Many" --* "One" User : To
+    Order "One" --* "Many" OrderMenu : To
 }
 @enduml

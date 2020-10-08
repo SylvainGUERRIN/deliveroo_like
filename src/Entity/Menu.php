@@ -53,10 +53,16 @@ class Menu
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderMenu", mappedBy="menu")
+     */
+    private $orderMenus;
+
     public function __construct()
     {
         $this->cartItems = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->orderMenus = new ArrayCollection();
     }
 
     /**
@@ -227,6 +233,43 @@ class Menu
         if ($this->comments->contains($comment)) {
             $this->comments->removeElement($comment);
             $comment->removeTargetMenu($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrderMenu[]
+     */
+    public function getOrderMenus(): Collection
+    {
+        return $this->orderMenus;
+    }
+
+    /**
+     * @param OrderMenu $orderMenu
+     * @return $this
+     */
+    public function addOrderMenu(OrderMenu $orderMenu): self
+    {
+        if (!$this->orderMenus->contains($orderMenu)) {
+            $this->orderMenus[] = $orderMenu;
+            $orderMenu->setMenu($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param OrderMenu $orderMenu
+     * @return $this
+     */
+    public function removeOrderMenu(OrderMenu $orderMenu): self
+    {
+        if ($this->orderMenus->contains($orderMenu)) {
+            $this->orderMenus->removeElement($orderMenu);
+            // set the owning side to null (unless already changed)
+            if ($orderMenu->getMenu() === $this) {
+                $orderMenu->setMenu(null);
+            }
         }
         return $this;
     }
