@@ -49,6 +49,11 @@ class Order
      */
     private $orderMenus;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PaymentMethod", inversedBy="orders")
+     */
+    private $paymentMethod;
+
     public function __construct()
     {
 //        $this->restaurants = new ArrayCollection();
@@ -187,6 +192,24 @@ class Order
                 $orderMenu->setOrders(null);
             }
         }
+        return $this;
+    }
+
+    /**
+     * @return PaymentMethod|null
+     */
+    public function getPaymentMethod(): ?PaymentMethod
+    {
+        return $this->paymentMethod;
+    }
+
+    /**
+     * @param PaymentMethod|null $paymentMethod
+     * @return $this
+     */
+    public function setPaymentMethod(?PaymentMethod $paymentMethod): self
+    {
+        $this->paymentMethod = $paymentMethod;
         return $this;
     }
 }

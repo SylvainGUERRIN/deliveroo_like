@@ -87,9 +87,15 @@ package "Entities" #FFF {
     }
     class OrderMenu {
         {field} id: int
-        {field} quantity: string
+        {field} quantity: integer
         {field} orders: relation
         {field} menu: relation
+    }
+    class PaymentMethod {
+        {field} id: int
+        {field} identifier: string
+        {field} name: string
+        {field} orders: relation
     }
 
     User "Many" --* "One" Gender : To
@@ -117,5 +123,7 @@ package "Entities" #FFF {
     Order "Many" --* "One" Address : To
     Order "Many" --* "One" User : To
     Order "One" --* "Many" OrderMenu : To
+
+    PaymentMethod "One" --* "Many" Order : To
 }
 @enduml
