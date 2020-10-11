@@ -58,6 +58,11 @@ class Menu
      */
     private $orderMenus;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="menus")
+     */
+    private $restaurant;
+
     public function __construct()
     {
         $this->cartItems = new ArrayCollection();
@@ -271,6 +276,24 @@ class Menu
                 $orderMenu->setMenu(null);
             }
         }
+        return $this;
+    }
+
+    /**
+     * @return Restaurant|null
+     */
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    /**
+     * @param Restaurant|null $restaurant
+     * @return $this
+     */
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
         return $this;
     }
 }

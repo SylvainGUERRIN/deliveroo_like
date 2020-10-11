@@ -48,10 +48,16 @@ class Address
      */
     private $orders;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Restaurant", mappedBy="address")
+     */
+    private $restaurants;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->restaurants = new ArrayCollection();
     }
 
     /**
@@ -204,6 +210,43 @@ class Address
             // set the owning side to null (unless already changed)
             if ($order->getDeliveryAddress() === $this) {
                 $order->setDeliveryAddress(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Restaurant[]
+     */
+    public function getRestaurants(): Collection
+    {
+        return $this->restaurants;
+    }
+
+    /**
+     * @param Restaurant $restaurant
+     * @return $this
+     */
+    public function addRestaurant(Restaurant $restaurant): self
+    {
+        if (!$this->restaurants->contains($restaurant)) {
+            $this->restaurants[] = $restaurant;
+            $restaurant->setAddress($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Restaurant $restaurant
+     * @return $this
+     */
+    public function removeRestaurant(Restaurant $restaurant): self
+    {
+        if ($this->restaurants->contains($restaurant)) {
+            $this->restaurants->removeElement($restaurant);
+            // set the owning side to null (unless already changed)
+            if ($restaurant->getAddress() === $this) {
+                $restaurant->setAddress(null);
             }
         }
         return $this;

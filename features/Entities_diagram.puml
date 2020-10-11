@@ -97,9 +97,20 @@ package "Entities" #FFF {
         {field} name: string
         {field} orders: relation
     }
+    class Restaurant {
+            {field} id: int
+            {field} name: string
+            {field} number: string
+            {field} opensAt: time
+            {field} closesAt: time
+            {field} enabled: boolean
+            {field} published: boolean
+            {field} createdAt: dateTimeInterface
+            {field} categories: relation
+        }
 
     User "Many" --* "One" Gender : To
-    User "Many" --* "Many" Address : To
+    User "Many" *--* "Many" Address : To
     User "One" --* "Many" Comment : To
     User "One" --* "Many" DisLike : To
     User "One" --* "Many" Like : To
@@ -114,7 +125,7 @@ package "Entities" #FFF {
 
     Menu "One" --* "Many" CartItem : To
     Menu "Many" --* "One" Category : To
-    Menu "Many" --* "Many" Comment : To
+    Menu "Many" *--* "Many" Comment : To
     Menu "Many" --* "One" Image : To
 
     OrderMenu "Many" --* "One" Order : To
@@ -125,5 +136,15 @@ package "Entities" #FFF {
     Order "One" --* "Many" OrderMenu : To
 
     PaymentMethod "One" --* "Many" Order : To
+
+    Restaurant "Many" *--* "Many" Category : To
+    Restaurant "One" --* "One" User : To
+    Restaurant "One" --* "Many" User : To
+    Restaurant "One" *--* "Many" DisLike : To
+    Restaurant "One" --* "Many" Like : To
+    Restaurant "Many" --* "Many" Order : To
+    Restaurant "Many" --* "One" City : To
+    Restaurant "One" --* "Many" Menu : To
+    Restaurant "Many" --* "One" Address : To
 }
 @enduml

@@ -36,6 +36,11 @@ class Category
     private $menus;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Restaurant", mappedBy="categories")
+     */
+    private $restaurants;
+
+    /**
      * Category constructor.
      */
     public function __construct()
@@ -121,6 +126,40 @@ class Category
             if ($menu->getCategory() === $this) {
                 $menu->setCategory(null);
             }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Restaurant[]
+     */
+    public function getRestaurants(): Collection
+    {
+        return $this->restaurants;
+    }
+
+    /**
+     * @param Restaurant $restaurant
+     * @return $this
+     */
+    public function addRestaurant(Restaurant $restaurant): self
+    {
+        if (!$this->restaurants->contains($restaurant)) {
+            $this->restaurants[] = $restaurant;
+            $restaurant->addCategory($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Restaurant $restaurant
+     * @return $this
+     */
+    public function removeRestaurant(Restaurant $restaurant): self
+    {
+        if ($this->restaurants->contains($restaurant)) {
+            $this->restaurants->removeElement($restaurant);
+            $restaurant->removeCategory($this);
         }
         return $this;
     }

@@ -98,6 +98,21 @@ class User implements UserInterface, \Serializable
     private $orders;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Restaurant", cascade={"persist", "remove"})
+     */
+    private $restaurant;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Restaurant", mappedBy="owner", cascade={"persist", "remove"})
+     */
+    private $owners;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="managers")
+     */
+    private $managedRestaurant;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -461,6 +476,65 @@ class User implements UserInterface, \Serializable
                 $order->setConsumer(null);
             }
         }
+        return $this;
+    }
+
+    /**
+     * @return Restaurant|null
+     */
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    /**
+     * @param Restaurant|null $restaurant
+     * @return $this
+     */
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
+        return $this;
+    }
+
+    /**
+     * @return Restaurant|null
+     */
+    public function getOwners(): ?Restaurant
+    {
+        return $this->owners;
+    }
+
+    /**
+     * @param Restaurant|null $owners
+     * @return $this
+     */
+    public function setOwners(?Restaurant $owners): self
+    {
+        $this->owners = $owners;
+        // set (or unset) the owning side of the relation if necessary
+        $newOwner = null === $owners ? null : $this;
+        if ($owners->getOwner() !== $newOwner) {
+            $owners->setOwner($newOwner);
+        }
+        return $this;
+    }
+
+    /**
+     * @return Restaurant|null
+     */
+    public function getManagedRestaurant(): ?Restaurant
+    {
+        return $this->managedRestaurant;
+    }
+
+    /**
+     * @param Restaurant|null $managedRestaurant
+     * @return $this
+     */
+    public function setManagedRestaurant(?Restaurant $managedRestaurant): self
+    {
+        $this->managedRestaurant = $managedRestaurant;
         return $this;
     }
 

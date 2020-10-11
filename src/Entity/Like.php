@@ -30,6 +30,11 @@ class Like
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="likes")
+     */
+    private $target;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -72,6 +77,24 @@ class Like
     {
         $this->user = $user;
 
+        return $this;
+    }
+
+    /**
+     * @return Restaurant|null
+     */
+    public function getTarget(): ?Restaurant
+    {
+        return $this->target;
+    }
+
+    /**
+     * @param Restaurant|null $target
+     * @return $this
+     */
+    public function setTarget(?Restaurant $target): self
+    {
+        $this->target = $target;
         return $this;
     }
 }

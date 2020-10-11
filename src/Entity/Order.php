@@ -54,9 +54,14 @@ class Order
      */
     private $paymentMethod;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Restaurant", inversedBy="orders")
+     */
+    private $restaurants;
+
     public function __construct()
     {
-//        $this->restaurants = new ArrayCollection();
+        $this->restaurants = new ArrayCollection();
         $this->orderMenus = new ArrayCollection();
     }
 
@@ -210,6 +215,38 @@ class Order
     public function setPaymentMethod(?PaymentMethod $paymentMethod): self
     {
         $this->paymentMethod = $paymentMethod;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Restaurant[]
+     */
+    public function getRestaurants(): Collection
+    {
+        return $this->restaurants;
+    }
+
+    /**
+     * @param Restaurant $restaurant
+     * @return $this
+     */
+    public function addRestaurant(Restaurant $restaurant): self
+    {
+        if (!$this->restaurants->contains($restaurant)) {
+            $this->restaurants[] = $restaurant;
+        }
+        return $this;
+    }
+
+    /**
+     * @param Restaurant $restaurant
+     * @return $this
+     */
+    public function removeRestaurant(Restaurant $restaurant): self
+    {
+        if ($this->restaurants->contains($restaurant)) {
+            $this->restaurants->removeElement($restaurant);
+        }
         return $this;
     }
 }

@@ -35,6 +35,11 @@ class City
     private $addresses;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Restaurant", mappedBy="city")
+     */
+    private $restaurants;
+
+    /**
      * City constructor.
      */
     public function __construct()
@@ -104,7 +109,6 @@ class City
             $this->addresses[] = $address;
             $address->setCity($this);
         }
-
         return $this;
     }
 
@@ -121,7 +125,43 @@ class City
                 $address->setCity(null);
             }
         }
+        return $this;
+    }
 
+    /**
+     * @return Collection|Restaurant[]
+     */
+    public function getRestaurants(): Collection
+    {
+        return $this->restaurants;
+    }
+
+    /**
+     * @param Restaurant $restaurant
+     * @return $this
+     */
+    public function addRestaurant(Restaurant $restaurant): self
+    {
+        if (!$this->restaurants->contains($restaurant)) {
+            $this->restaurants[] = $restaurant;
+            $restaurant->setCity($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Restaurant $restaurant
+     * @return $this
+     */
+    public function removeRestaurant(Restaurant $restaurant): self
+    {
+        if ($this->restaurants->contains($restaurant)) {
+            $this->restaurants->removeElement($restaurant);
+            // set the owning side to null (unless already changed)
+            if ($restaurant->getCity() === $this) {
+                $restaurant->setCity(null);
+            }
+        }
         return $this;
     }
 }

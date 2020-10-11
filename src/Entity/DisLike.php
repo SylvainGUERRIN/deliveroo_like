@@ -29,6 +29,11 @@ class DisLike
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="disLikes")
+     */
+    private $target;
+
+    /**
      * @return mixed
      */
     public function getId(): ?int
@@ -70,6 +75,24 @@ class DisLike
     {
         $this->user = $user;
 
+        return $this;
+    }
+
+    /**
+     * @return Restaurant|null
+     */
+    public function getTarget(): ?Restaurant
+    {
+        return $this->target;
+    }
+
+    /**
+     * @param Restaurant|null $target
+     * @return $this
+     */
+    public function setTarget(?Restaurant $target): self
+    {
+        $this->target = $target;
         return $this;
     }
 }
