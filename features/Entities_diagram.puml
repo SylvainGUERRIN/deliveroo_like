@@ -98,16 +98,23 @@ package "Entities" #FFF {
         {field} orders: relation
     }
     class Restaurant {
-            {field} id: int
-            {field} name: string
-            {field} number: string
-            {field} opensAt: time
-            {field} closesAt: time
-            {field} enabled: boolean
-            {field} published: boolean
-            {field} createdAt: dateTimeInterface
-            {field} categories: relation
-        }
+        {field} id: int
+        {field} name: string
+        {field} number: string
+        {field} opensAt: time
+        {field} closesAt: time
+        {field} enabled: boolean
+        {field} published: boolean
+        {field} createdAt: dateTimeInterface
+        {field} categories: relation
+    }
+
+    class StripeClient {
+        {field} id: int
+        {field} accountId: string
+        {field} stripePublishableKey: string
+        {field} restaurant: relation
+    }
 
     User "Many" --* "One" Gender : To
     User "Many" *--* "Many" Address : To
@@ -146,5 +153,7 @@ package "Entities" #FFF {
     Restaurant "Many" --* "One" City : To
     Restaurant "One" --* "Many" Menu : To
     Restaurant "Many" --* "One" Address : To
+
+    StripeClient "One" --* "One" Restaurant : To
 }
 @enduml

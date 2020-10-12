@@ -99,6 +99,11 @@ class Restaurant
     private $address;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\StripeClient", cascade={"persist", "remove"})
+     */
+    private $stripeClient;
+
+    /**
      * Restaurant constructor.
      */
     public function __construct()
@@ -534,6 +539,24 @@ class Restaurant
     {
         $this->address = $address;
 
+        return $this;
+    }
+
+    /**
+     * @return StripeClient|null
+     */
+    public function getStripeClient(): ?StripeClient
+    {
+        return $this->stripeClient;
+    }
+
+    /**
+     * @param StripeClient|null $stripeClient
+     * @return $this
+     */
+    public function setStripeClient(?StripeClient $stripeClient): self
+    {
+        $this->stripeClient = $stripeClient;
         return $this;
     }
 }
