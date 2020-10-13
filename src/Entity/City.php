@@ -40,6 +40,11 @@ class City
     private $restaurants;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Biker", mappedBy="cityWorkWith")
+     */
+    private $bikers;
+
+    /**
      * City constructor.
      */
     public function __construct()
@@ -160,6 +165,43 @@ class City
             // set the owning side to null (unless already changed)
             if ($restaurant->getCity() === $this) {
                 $restaurant->setCity(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Restaurant[]
+     */
+    public function getBikers(): Collection
+    {
+        return $this->bikers;
+    }
+
+    /**
+     * @param Biker $biker
+     * @return $this
+     */
+    public function addBiker(Biker $biker): self
+    {
+        if (!$this->bikers->contains($biker)) {
+            $this->bikers[] = $biker;
+            $biker->setCity($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Biker $biker
+     * @return $this
+     */
+    public function removeBiker(Biker $biker): self
+    {
+        if ($this->bikers->contains($biker)) {
+            $this->bikers->removeElement($biker);
+            // set the owning side to null (unless already changed)
+            if ($biker->getCity() === $this) {
+                $biker->setCity(null);
             }
         }
         return $this;
