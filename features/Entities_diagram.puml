@@ -116,6 +116,20 @@ package "Entities" #FFF {
         {field} restaurant: relation
     }
 
+    class Social {
+        {field} id: int
+        {field} name: string
+        {field} shortcode: string
+        {field} socialLinks: relation
+    }
+
+    class SocialLink {
+        {field} id: int
+        {field} url: string
+        {field} type: relation
+        {field} user: relation
+    }
+
     User "Many" --* "One" Gender : To
     User "Many" *--* "Many" Address : To
     User "One" --* "Many" Comment : To
@@ -155,5 +169,8 @@ package "Entities" #FFF {
     Restaurant "Many" --* "One" Address : To
 
     StripeClient "One" --* "One" Restaurant : To
+
+    Social "One" --* "Many" SocialLink : To
+    SocialLink "Many" --* "One" User : To
 }
 @enduml

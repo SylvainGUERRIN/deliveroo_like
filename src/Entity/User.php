@@ -113,6 +113,11 @@ class User implements UserInterface, \Serializable
     private $managedRestaurant;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SocialLink", mappedBy="user")
+     */
+    private $socialLinks;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -122,6 +127,7 @@ class User implements UserInterface, \Serializable
         $this->disLikes = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->socialLinks = new ArrayCollection();
     }
 
     /**
@@ -535,6 +541,43 @@ class User implements UserInterface, \Serializable
     public function setManagedRestaurant(?Restaurant $managedRestaurant): self
     {
         $this->managedRestaurant = $managedRestaurant;
+        return $this;
+    }
+
+    /**
+     * @return Collection|SocialLink[]
+     */
+    public function getSocialLinks(): Collection
+    {
+        return $this->socialLinks;
+    }
+
+    /**
+     * @param SocialLink $socialLink
+     * @return $this
+     */
+    public function addSocialLink(SocialLink $socialLink): self
+    {
+        if (!$this->socialLinks->contains($socialLink)) {
+            $this->socialLinks[] = $socialLink;
+            $socialLink->setUser($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param SocialLink $socialLink
+     * @return $this
+     */
+    public function removeSocialLink(SocialLink $socialLink): self
+    {
+        if ($this->socialLinks->contains($socialLink)) {
+            $this->socialLinks->removeElement($socialLink);
+            // set the owning side to null (unless already changed)
+            if ($socialLink->getUser() === $this) {
+                $socialLink->setUser(null);
+            }
+        }
         return $this;
     }
 
