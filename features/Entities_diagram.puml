@@ -130,6 +130,35 @@ package "Entities" #FFF {
         {field} user: relation
     }
 
+    class Biker {
+        {field} id: int
+        {field} entrepriseCode: string
+        {field} RightToCreateEnterprise: boolean
+        {field} birthdayDate: dateTimeInterface
+        {field} sponsorship: string
+        {field} iban: string
+        {field} transportation: string
+        {field} cityWorkWith: relation
+        {field} courses: relation
+    }
+
+    class Course {
+        {field} id: int
+        {field} client: string
+        {field} deliverabilityTime: dateTimeInterface
+        {field} biker: relation
+        {field} coursePrice: relation
+    }
+
+    class CoursePrice {
+        {field} id: int
+        {field} atRestaurant: boolean
+        {field} distance: float
+        {field} getAtClient: boolean
+        {field} costs: boolean
+        {field} course: relation
+    }
+
     User "Many" --* "One" Gender : To
     User "Many" *--* "Many" Address : To
     User "One" --* "Many" Comment : To
@@ -172,5 +201,10 @@ package "Entities" #FFF {
 
     Social "One" --* "Many" SocialLink : To
     SocialLink "Many" --* "One" User : To
+
+    Biker "One" --* "Many" Course : To
+    Biker "One" --* "One" User : To
+    City "One" --* "Many" Biker : To
+    Course "One" --* "One" CoursePrice : To
 }
 @enduml

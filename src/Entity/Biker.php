@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,6 +52,19 @@ class Biker
      * @ORM\ManyToOne(targetEntity="App\Entity\City", inversedBy="bikers")
      */
     private $cityWorkWith;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Course", mappedBy="biker")
+     */
+    private $courses;
+
+    /**
+     * Biker constructor.
+     */
+    public function __construct()
+    {
+        $this->courses = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -182,6 +197,43 @@ class Biker
     public function setCityWorkWith(?City $city): self
     {
         $this->cityWorkWith = $city;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Course[]
+     */
+    public function getCourses(): Collection
+    {
+        return $this->courses;
+    }
+
+    /**
+     * @param Course $course
+     * @return $this
+     */
+    public function addOrder(Course $course): self
+    {
+        if (!$this->courses->contains($course)) {
+            $this->courses[] = $course;
+            $course->setBiker($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Course $course
+     * @return $this
+     */
+    public function removeOrder(Course $course): self
+    {
+        if ($this->orders->contains($course)) {
+            $this->orders->removeElement($course);
+            // set the owning side to null (unless already changed)
+            if ($course->getBiker() === $this) {
+                $course->setBiker(null);
+            }
+        }
         return $this;
     }
 }
