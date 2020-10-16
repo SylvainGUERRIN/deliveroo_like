@@ -118,6 +118,11 @@ class User implements UserInterface, \Serializable
     private $socialLinks;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Biker", mappedBy="biker", cascade={"persist", "remove"})
+     */
+    private $bikers;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -577,6 +582,29 @@ class User implements UserInterface, \Serializable
             if ($socialLink->getUser() === $this) {
                 $socialLink->setUser(null);
             }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Biker|null
+     */
+    public function getBikers(): ?Biker
+    {
+        return $this->bikers;
+    }
+
+    /**
+     * @param Biker|null $bikers
+     * @return $this
+     */
+    public function setBikers(Biker $bikers): self
+    {
+        $this->bikers = $bikers;
+        // set (or unset) the owning side of the relation if necessary
+        $newOwner = null === $bikers ? null : $this;
+        if ($bikers->getBiker() !== $newBiker) {
+            $bikers->setBiker($newBiker);
         }
         return $this;
     }

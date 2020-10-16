@@ -59,6 +59,11 @@ class Biker
     private $courses;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="bikers", cascade={"persist", "remove"})
+     */
+    private $biker;
+
+    /**
      * Biker constructor.
      */
     public function __construct()
@@ -234,6 +239,24 @@ class Biker
                 $course->setBiker(null);
             }
         }
+        return $this;
+    }
+
+    /**
+     * @return Biker|null
+     */
+    public function getBiker(): ?Biker
+    {
+        return $this->biker;
+    }
+
+    /**
+     * @param Biker|null $biker
+     * @return $this
+     */
+    public function setBiker(?Biker $biker): self
+    {
+        $this->biker = $biker;
         return $this;
     }
 }
