@@ -1,0 +1,38 @@
+/* general */
+body{
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+a{
+    color: #ffffff;
+}
+a:hover{
+    color: #00ccbc;
+    text-decoration: none;
+}
+
+/* navbar */
+.navbar-head{
+    background-color: #00ccbc !important;
+}
+
+/* footer */
+footer{
+    background-color: #2e3333;
+    color: #ffffff;
+}
+footer .list-group, footer .list-group-item{
+    border: none !important;
+    background-color: #434848;
+}
+footer .list-group-item{
+    padding: .10rem 1.25rem !important;
+}
+.bg-list-grey{
+    background-color: #434848;
+    border: 1px solid #434848;
+    border-radius: 5px;
+}
+footer h5{
+    padding: 0 1.25rem;
+    font-family: 'IBM Plex Sans Bold', sans-serif;
+}
