@@ -10,11 +10,25 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link{% if current == 'home' %} active{% endif %}" href="{{ path('home') }}">Accueil</a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link{% if current == 'contact' %} active{% endif %}" href="{{ path('contact') }}">Contact</a>#}
+{#                </li>#}
                 <li class="nav-item">
-                    <a class="nav-link{% if current == 'home' %} active{% endif %}" href="{{ path('home') }}">Accueil</a>
+                    <a class="btn btn-white" href="{{ path('registration') }}">
+                            <i class="fas fa-home"></i>
+                            Connexion
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{% if current == 'contact' %} active{% endif %}" href="{{ path('contact') }}">Contact</a>
+                    <a class="btn btn-white" href="#">
+
+                            <i class="fas fa-hamburger"></i>
+
+                        Menu
+                    </a>
                 </li>
 {#                {% if app.user is not null %}#}
 {#                    <li class="nav-item dropdown">#}

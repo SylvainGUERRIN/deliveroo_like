@@ -14,6 +14,26 @@ a:hover{
 .navbar-head{
     background-color: #00ccbc !important;
 }
+.navbar-brand{
+    font-weight: 700;
+    font-size: 26px;
+}
+.navbar-brand:hover{
+    opacity: .5;
+}
+.nav-link{
+    font-weight: 500;
+    font-size: 19px;
+}
+.navbar-nav i{
+    margin: 0 5%;
+}
+.nav-item{
+    margin: 0 3%;
+}
+.fa-home, .fa-hamburger{
+    color: #00ccbc;
+}
 
 /* footer */
 footer{
@@ -28,6 +48,7 @@ footer .list-group-item{
     padding: .10rem 1.25rem !important;
 }
 .bg-list-grey{
+    width: 100%;
     background-color: #434848;
     border: 1px solid #434848;
     border-radius: 5px;
@@ -35,4 +56,57 @@ footer .list-group-item{
 footer h5{
     padding: 0 1.25rem;
     font-family: 'IBM Plex Sans Bold', sans-serif;
+}
+.footer-column{
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 2%;
+}
+.logos-stores{
+    padding: 0 1.25rem;
+}
+.logo-app-store, .logo-google-play{
+    width: 135px;
+    height: 40px;
+    display: inline-block;
+    text-indent: -9999px;
+    background: url("../../assets/icones/app-store-badges-fr.svg") no-repeat;
+    background-size: 270px 40px;
+}
+.logo-app-store{
+    background-position: 0 0;
+}
+.logo-google-play{
+    background-position: -135px 0;
+}
+.socials-links, .copyright{
+    width: 50%;
+}
+footer path{
+    fill: currentColor;
+}
+.bottom-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* buttons */
+.btn{
+    display: flex!important;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.btn-white{
+    background-color: #ffffff;
+    border: 1px solid #838686;
+    border-radius: 5px;
+    color: #838686;
+}
+.btn-white:hover{
+    border-color: #2a2f2f;
+}
+.btn-white:hover .fa-home, .btn-white:hover .fa-hamburger{
+    color: #018177;
 }
