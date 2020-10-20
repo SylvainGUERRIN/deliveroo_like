@@ -2,14 +2,51 @@
 
 {% block title %}Accueil - Deliveroo_like{% endblock %}
 
-{#{% block stylesheets %}#}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('site/css/home.css') }}">
 {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">#}
 {#    <link rel="stylesheet"#}
 {#          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">#}
-{#{% endblock %}#}
+{% endblock %}
 
 {% block body %}
-
+    <section class="intro-home pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h1 class="mb-5">
+                        Vos restaurants préférés, livrés chez vous en un clic
+                    </h1>
+                    <div class="form-search">
+                        <form action="">
+                            <div class="form-group row">
+                                <label for="inputSearch" class="col-12 col-form-label">
+                                    <small>
+                                        Entrez votre adresse pour trouver les restaurants à proximité
+                                    </small>
+                                </label>
+                                <div class="col-sm-8 field-search">
+                                    <input type="text" class="form-control" id="inputSearch">
+                                    <span>
+                                        <svg height="24" width="24" viewBox="0 0 24 24">
+                                            <path d="M2 11.8214L21 3L12.1786 22L10.1429 13.8571L2 11.8214ZM11.7882 12.2118L12.7455 16.0408L16.8936 7.10644L7.95923 11.2545L11.7882 12.2118Z"></path>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button class="btn btn-blue" type="submit">Rechercher</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+    {#                <div class="image-promo"></div>#}
+                    <img src="{{ asset('assets/images/brandable-box.jpg') }}" alt="delivery box">
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
 
 {#{% block javascripts %}#}

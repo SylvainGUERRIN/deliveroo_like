@@ -1,6 +1,11 @@
 /* general */
 body{
     font-family: 'IBM Plex Sans', sans-serif;
+    position: relative;
+}
+h1{
+    font-weight: 700;
+    letter-spacing: 0.05em;
 }
 a{
     color: #ffffff;
@@ -11,8 +16,12 @@ a:hover{
 }
 
 /* navbar */
+.navbar{
+    z-index: 1;
+}
 .navbar-head{
-    background-color: #00ccbc !important;
+    /*background-color: #00ccbc !important;*/
+    z-index: 1;
 }
 .navbar-brand{
     font-weight: 700;
@@ -21,6 +30,7 @@ a:hover{
 .navbar-brand:hover{
     opacity: .5;
 }
+/* change with btn because remove nav-link*/
 .nav-link{
     font-weight: 500;
     font-size: 19px;
@@ -32,7 +42,15 @@ a:hover{
     margin: 0 3%;
 }
 .fa-home, .fa-hamburger{
-    color: #00ccbc;
+    color: #01433e;
+}
+/*.navbar-toggler-icon {*/
+/*    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,102,203, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")!important;*/
+/*}*/
+
+.navbar-toggler {
+    border-bottom-width: 2px;
+    border-color: #018177!important;
 }
 
 /* footer */
@@ -109,4 +127,15 @@ footer path{
 }
 .btn-white:hover .fa-home, .btn-white:hover .fa-hamburger{
     color: #018177;
+}
+.btn-blue{
+    background-color: #00ccbc;
+    border: 1px solid #00ccbc;
+    border-radius: 5px;
+    color: #ffffff;
+}
+.btn-blue:hover{
+    background-color: #01433e;
+    border-color: #01433e;
+    color: #ffffff;
 }
