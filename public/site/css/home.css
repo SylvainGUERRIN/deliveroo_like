@@ -53,3 +53,35 @@
     right: 25px;
     fill: #00ccbc;
 }
+
+/* sections food */
+.background-img{
+    width: 100%;
+    height: 150px;
+    position: relative;
+    opacity: 0.9;
+}
+.bold-span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+.affair{
+    background: url("../../assets/images/accueil/alexandr-podvalny-WOxddhzhC1w-unsplash.jpg") 50% / cover no-repeat;
+}
+.confort{
+    background: url("../../assets/images/accueil/amirali-mirhashemian-sc5sTPMrVfk-unsplash.jpg") 50% / cover no-repeat;
+}
+.balanced{
+    background: url("../../assets/images/accueil/chad-montano-MqT0asuoIcU-unsplash.jpg") 50% / cover no-repeat;
+}
+.small-pleasure{
+    background: url("../../assets/images/accueil/dan-gold-4_jhDO54BYg-unsplash.jpg") 50% / cover no-repeat;
+}
+
+/* sections places */
+.places{
+    background-color: #ffeae4;
+}

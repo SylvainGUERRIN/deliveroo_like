@@ -10,9 +10,23 @@ h1{
 a{
     color: #ffffff;
 }
+a p{
+    color: #000000;
+}
+a .link{
+    color: #00ccbc;
+}
 a:hover{
     color: #00ccbc;
     text-decoration: none;
+}
+.bold-span{
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-size: 2rem;
+    color: #ffffff;
+    opacity: 1;
+    text-align: center;
 }
 
 /* navbar */
