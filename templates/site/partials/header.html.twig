@@ -1,5 +1,43 @@
 {% set current = app.request.attributes.get("_route") %}
-<nav class="navbar navbar-expand-lg navbar-dark navbar-head">
+<div class="overlay"></div>
+<!-- Sidebar -->
+<nav id="sidebar">
+    <div id="dismiss">
+        <i class="fas fa-arrow-left"></i>
+    </div>
+
+    <div class="sidebar-header">
+        <h3>Deliveroo-like Sidebar</h3>
+    </div>
+
+    <ul class="list-unstyled components">
+{#        <li class="active">#}
+{#            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>#}
+{#            <ul class="collapse list-unstyled" id="homeSubmenu">#}
+{#                <li>#}
+{#                    <a href="#">Home 1</a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="#">Home 2</a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="#">Home 3</a>#}
+{#                </li>#}
+{#            </ul>#}
+{#        </li>#}
+        <li>
+            <a class="btn btn-white" href="{{ path('registration') }}">
+                <i class="fas fa-home"></i>
+                Inscription/Connexion
+            </a>
+        </li>
+        <li>
+            <a class="btn btn-white" href="#">Contact</a>
+        </li>
+    </ul>
+</nav>
+<!-- navbar -->
+<nav id="startChange" class="navbar navbar-expand-lg navbar-dark navbar-head">
     <div class="container">
         <a class="navbar-brand" href="{{ path('home') }}">
             Deliveroo-like
@@ -18,15 +56,13 @@
 {#                </li>#}
                 <li class="nav-item">
                     <a class="btn btn-white" href="{{ path('registration') }}">
-                            <i class="fas fa-home"></i>
-                            Inscription/Connexion
+                        <i class="fas fa-home"></i>
+                        Inscription/Connexion
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-white" href="#">
-
-                            <i class="fas fa-hamburger"></i>
-
+                    <a id="sidebarCollapse" class="btn btn-white" href="#">
+                        <i class="fas fa-hamburger"></i>
                         Menu
                     </a>
                 </li>
