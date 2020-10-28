@@ -35,4 +35,27 @@ class SecurityController
     {
         return new Response($this->twig->render('user/registration.html.twig'));
     }
+
+    /**
+     * @Route("/mail-registration", name="mail_registration")
+     * @return Response
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function mailRegistration(): Response
+    {
+        return new Response($this->twig->render('user/mail-registration.html.twig'));
+    }
+
+    /**
+     * @Route("/connexion", name="login")
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function login(): Response
+    {
+        return new Response($this->twig->render('user/login.html.twig'));
+    }
 }

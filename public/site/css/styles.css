@@ -42,6 +42,7 @@ a:hover{
 .navbar-brand{
     font-weight: 700;
     font-size: 26px;
+    color: #4d5454 !important;
 }
 .navbar-brand:hover{
     opacity: .5;
