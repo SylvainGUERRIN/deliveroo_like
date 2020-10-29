@@ -11,7 +11,43 @@
         <div class="row">
             <div class="col-12 registration">
                 <h3 class="text-center mb-5">Inscription</h3>
-
+                {{ form_start(form) }}
+                <div class="row mb-5">
+                    <div class="col-3">
+                        {{ form_label(form.firstName) }}
+                    </div>
+                    <div class="col-9">
+                        {{ form_widget(form.firstName) }}
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-3">
+                        {{ form_label(form.lastName) }}
+                    </div>
+                    <div class="col-9">
+                        {{ form_widget(form.lastName) }}
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-3">
+                        {{ form_label(form.email) }}:
+                    </div>
+                    <div class="col-9">
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-3">
+                        {{ form_label(form.password) }}
+                    </div>
+                    <div class="col-9">
+                        {{ form_widget(form.password) }}
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-white btn-lg">S'inscrire</button>
+                </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
