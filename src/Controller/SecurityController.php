@@ -86,7 +86,7 @@ class SecurityController
         if ($form->isSubmitted() && $form->isValid()) {
             $hashPass = $userPasswordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hashPass);
-            $user->setCreatedAt(new \DateTime('now'));
+            $user->setCreatedAt(new \DateTimeImmutable('now'));
             $user->setRole(['ROLE_USER']);
 
             $em = $this->doctrine->getManager();
@@ -97,7 +97,7 @@ class SecurityController
                 'Votre compte a bien été créé ! Vous pouvez maintenant vous connecter !'
             );
 
-            return new RedirectResponse('user_connexion');
+            return new RedirectResponse('login');
         }
 
         return new Response($this->twig->render('user/mail-registration.html.twig',[
@@ -117,14 +117,34 @@ class SecurityController
     public function login(AuthenticationUtils $helper, Security $security): Response
     {
         if ($security->isGranted('ROLE_USER')) {
-            return new RedirectResponse('user_profil');
+            return new RedirectResponse('/user-profile');
         }
 
-//        $error = $utils->getLastAuthenticationError();
-//        $username = $utils->getLastUsername();
         return new Response($this->twig->render('user/login.html.twig',[
             'last_username' => $helper->getLastUsername(),
             'error' => $helper->getLastAuthenticationError(),
         ]));
+    }
+
+    /**
+     * @Route("/user-profile", name="profile")
+     * @return Response
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function profile(): Response
+    {
+        return new Response($this->twig->render('user/profile.html.twig'));
+    }
+
+    /**
+     * permet de se deconnecter
+     * @Route("/deconnexion", name="logout")
+     * @return void
+     */
+    public function logout(): void
+    {
+        //automatic redirection
     }
 }

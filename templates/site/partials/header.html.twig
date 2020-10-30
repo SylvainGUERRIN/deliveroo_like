@@ -54,25 +54,40 @@
 {#                <li class="nav-item">#}
 {#                    <a class="nav-link{% if current == 'contact' %} active{% endif %}" href="{{ path('contact') }}">Contact</a>#}
 {#                </li>#}
-                {% if current == 'registration' or current == 'mail_registration' %}
-                    <li class="nav-item">
-                        <a class="btn btn-white" href="{{ path('login') }}">
-                            <i class="fas fa-home"></i>
-                            Connexion
-                        </a>
-                    </li>
-                {% elseif current == 'login' %}
-                    <li class="nav-item">
-                        <a class="btn btn-white" href="{{ path('registration') }}">
-                            <i class="fas fa-home"></i>
-                            Inscription
-                        </a>
-                    </li>
+                {% if app.user is null %}
+                    {% if current == 'registration' or current == 'mail_registration' %}
+                        <li class="nav-item">
+                            <a class="btn btn-white" href="{{ path('login') }}">
+                                <i class="fas fa-home"></i>
+                                Connexion
+                            </a>
+                        </li>
+                    {% elseif current == 'login' %}
+                        <li class="nav-item">
+                            <a class="btn btn-white" href="{{ path('registration') }}">
+                                <i class="fas fa-home"></i>
+                                Inscription
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="btn btn-white" href="{{ path('registration') }}">
+                                <i class="fas fa-home"></i>
+                                Inscription/Connexion
+                            </a>
+                        </li>
+                    {% endif %}
                 {% else %}
                     <li class="nav-item">
-                        <a class="btn btn-white" href="{{ path('registration') }}">
+                        <a class="btn btn-white" href="{{ path('profile') }}">
                             <i class="fas fa-home"></i>
-                            Inscription/Connexion
+                            Profil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-white" href="{{ path('logout') }}">
+                            <i class="fas fa-home"></i>
+                            Deconnexion
                         </a>
                     </li>
                 {% endif %}
