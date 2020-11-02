@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use App\Form\AccountType;
 use App\Form\RegistrationType;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Persistence\ManagerRegistry;
@@ -116,7 +117,7 @@ class SecurityController
      */
     public function login(AuthenticationUtils $helper, Security $security): Response
     {
-        if ($security->isGranted('ROLE_USER')) {
+        if ($security->isGranted('ROLE_CONSUMER')) {
             return new RedirectResponse('/user-profile');
         }
 
@@ -135,7 +136,34 @@ class SecurityController
      */
     public function profile(): Response
     {
-        return new Response($this->twig->render('user/profile.html.twig'));
+        //find way to get user without global container
+        //$user = $this->getUser();
+        //dd($user);
+
+//        $oldImage = $user->getAvatarUrl();
+//        $avatar = new Avatar();
+
+        $form = $this->form->create(AccountType::class, $user);
+
+        $form->handleRequest($this->request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+//            $user->setUpdatedAt(new DateTime('now'));
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                "Les données du profil ont bien étés modifiées."
+            );
+        }
+
+        return new Response($this->twig->render('user/profile.html.twig',[
+            'form' => $form->createView()
+        ]));
     }
 
     /**
