@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Avatar;
+use App\Entity\Gender;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -38,6 +39,10 @@ class AccountType extends AbstractType
                 'required' => true,
                 'label' =>'Votre email',
                 'attr' => ['placeholder' => 'Veuillez mettre votre email']
+            ])
+            ->add('gender', EntityType::class, [
+                'class' => Gender::class,
+                'choice_label' => 'name'
             ])
 //            ->add('imageFile', VichImageType::class, [
 //                'label' => 'Téléchargez une image pour mettre dans votre profil',

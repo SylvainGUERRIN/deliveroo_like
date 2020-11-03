@@ -33,6 +33,7 @@ class SecurityController
     private $request;
     private $session;
     private $doctrine;
+    private $security;
 
     /**
      * SiteController constructor.
@@ -41,13 +42,15 @@ class SecurityController
      * @param RequestStack $request
      * @param SessionInterface $session
      * @param ManagerRegistry $registry
+     * @param Security $security
      */
     public function __construct(
         Environment $twig,
         FormFactoryInterface $form,
         RequestStack $request,
         SessionInterface $session,
-        ManagerRegistry $registry
+        ManagerRegistry $registry,
+        Security $security
     )
     {
         $this->twig = $twig;
@@ -55,6 +58,7 @@ class SecurityController
         $this->request = $request;
         $this->session = $session;
         $this->doctrine = $registry;
+        $this->security = $security;
     }
 
     /**
@@ -137,32 +141,34 @@ class SecurityController
     public function profile(): Response
     {
         //find way to get user without global container
-        //$user = $this->getUser();
+        $user = $this->security->getUser();
         //dd($user);
 
 //        $oldImage = $user->getAvatarUrl();
 //        $avatar = new Avatar();
 
         $form = $this->form->create(AccountType::class, $user);
+        //dd($form);
 
-        $form->handleRequest($this->request);
+        $form->handleRequest($this->request->getCurrentRequest());
 
         if ($form->isSubmitted() && $form->isValid()) {
 
 //            $user->setUpdatedAt(new DateTime('now'));
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->doctrine->getManager();
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash(
+            $this->session->getFlashBag()->add(
                 'success',
                 "Les données du profil ont bien étés modifiées."
             );
         }
 
         return new Response($this->twig->render('user/profile.html.twig',[
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'user' => $user
         ]));
     }
 
