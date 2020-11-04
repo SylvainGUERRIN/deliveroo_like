@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="288" height="357" viewBox="0 0 288 357">
+  <path fill="#F1F1F1" fill-rule="evenodd" d="M222.924497,0 L232.290925,15.7694652 L49.0811374,128.854522 L44.4199727,121.000658 L222.924497,0 Z M284.286944,69.9042398 L288,89.3823516 L74.21262,143.358373 L72.5898115,134.044864 L284.286944,69.9042398 Z M275.714281,202.44977 L250.900305,306.715215 L193.735994,333.976634 L192.90254,361.489412 L69.9571575,357.763126 L73.145447,332.25681 L28.3374114,313.770904 L0,200.659388 L275.714281,202.44977 Z M203.252354,142.313249 C203.252354,142.313249 233.940192,154.581329 237.093203,153.346583 C240.241804,152.116247 222.765744,189.912692 222.765744,189.912692 L179.254192,166.553951 L203.252354,142.313249 Z M157.72993,137.193465 C157.72993,137.193465 159.357148,183.950635 158.814742,186.305471 C158.272336,188.660307 118.936869,184.197584 118.936869,184.197584 L111.788574,150.683061 L157.72993,137.193465 Z M56.9482307,146.361451 L79.1075043,173.093693 L69.1589827,185.86449 L37.5450857,179.51437 L56.9482307,146.361451 Z"/>
+<script xmlns="">try {
+                        Object.defineProperty(screen, "availTop", { value: 0 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(screen, "availLeft", { value: 0 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(screen, "availWidth", { value: 1920 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(screen, "availHeight", { value: 1080 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(screen, "colorDepth", { value: 24 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(screen, "pixelDepth", { value: 24 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(navigator, "hardwareConcurrency", { value: 8 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(navigator, "appVersion", { value: "5.0 (Windows)" });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(navigator, "doNotTrack", { value: "unspecified" });
+                    } catch (e) {}
+                    
+            try {
+                window.screenY = 1072
+            } catch (e) { }
+        
+            try {
+                window.screenTop = 1072
+            } catch (e) { }
+        
+            try {
+                window.top.window.outerHeight = window.screen.height
+            } catch (e) { }
+        
+            try {
+                window.screenX = 0
+            } catch (e) { }
+        
+            try {
+                window.screenLeft = 0
+            } catch (e) { }
+        
+            try {
+                window.top.window.outerWidth = window.screen.width
+            } catch (e) { }
+        </script></svg>

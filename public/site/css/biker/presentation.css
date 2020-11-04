@@ -1,0 +1,75 @@
+/* punchline */
+.txt-punchline{
+    background-color: #00ccbc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 4% 2%;
+}
+.txt-position{
+    width: 50%;
+}
+.txt-punchline h2{
+    color: #ffffff;
+    /*width: 25%;*/
+    text-align: left;
+    font-weight: 700;
+}
+.img-punchline:before{
+    content: '';
+    width: 100%;
+    height: 400px;
+    clip-path: polygon(0 0, 8% 0, 16% 100%, 0% 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #00ccbc;
+}
+.img-punchline{
+    position: relative;
+    background: url("../../../assets/images/bikers/the-ride-academy.jpg") center center / cover no-repeat;
+    height: 400px;
+}
+/* choice*/
+.choice{
+    padding: 5% 0;
+    background-image: url("../../../assets/icones/donut.svg"),url('../../../assets/icones/ramen.svg');
+    background-position: top left, bottom right;
+    background-repeat: no-repeat;
+}
+.choice img{
+    width: 50%;
+    height: auto;
+}
+.choice .txt{
+    display: flex;
+    align-items: flex-end;
+}
+
+/* responsive */
+@media screen and (max-width: 991px){
+    /* punchline */
+    .txt-position{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 768px){
+    /* punchline */
+    .txt-punchline{
+        align-items: center;
+    }
+    .txt-punchline h2{
+        text-align: center;
+    }
+    .txt-position{
+        width: 80%;
+    }
+    .img-punchline:before{
+        display: none;
+    }
+    .img-punchline{
+        height: 250px;
+    }
+}

@@ -20,6 +20,12 @@ a:hover{
     color: #00ccbc;
     text-decoration: none;
 }
+::-moz-selection {
+    background: #00ccbc;
+}
+::selection {
+    background: #00ccbc;
+}
 .bold-span{
     font-weight: 700;
     letter-spacing: 0.05em;
@@ -31,18 +37,18 @@ a:hover{
 
 /* navbar */
 .navbar{
-    z-index: 1;
+    z-index: 2;
 }
 .navbar-head{
     /*background-color: #00ccbc !important;*/
-    z-index: 1;
+    z-index: 2;
     position: sticky;
     top: 0;
 }
 .navbar-brand{
     font-weight: 700;
     font-size: 26px;
-    color: #4d5454 !important;
+    color: #7d8080 !important;
 }
 .navbar-brand:hover{
     opacity: .5;

@@ -1,0 +1,41 @@
+{% extends 'site/partials/base.html.twig' %}
+{% block title %}Roulez avec nous ! - Deliveroo-like{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('site/css/biker/presentation.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="punchline-biker container-fluid mb-5">
+        <div class="row">
+            <div class="col-12 col-md-6 text-center txt-punchline">
+                <div class="txt-position">
+                    <h2>Flexibilité, indépendance, revenus attractifs</h2>
+                    <a class="btn btn-white" href="#">S'inscrire</a>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 img-punchline">
+{#                <img src="{{ asset('assets/images/bikers/the-ride-academy.jpg') }}" alt="">#}
+            </div>
+        </div>
+    </section>
+    <section class="choice mt-5 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col12 col-md-6 text-right">
+                    <img src="{{ asset('assets/images/bikers/neil-soni.jpg') }}" alt="">
+                </div>
+                <div class="col12 col-md-6 txt">
+                    <div class="txt-position">
+                        <h2>Choississez quand livrer</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima mollitia pariatur perferendis porro quo.
+                            Animi distinctio expedita id illo laboriosam nesciunt, nihil numquam omnis quas quia reiciendis
+                            sequi similique sunt!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

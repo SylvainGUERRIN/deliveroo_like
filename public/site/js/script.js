@@ -24,7 +24,7 @@ $(document).ready(function () {
         $(document).scroll(function() {
             scroll_start = $(this).scrollTop();
             if(scroll_start > offset.top) {
-                $(".navbar-head").css('background-color', '#026b62');
+                $(".navbar-head").css('background-color', '#2e3333');
                 $(".navbar-head").css('border-bottom', 'solid 1px #000000');
             } else {
                 $('.navbar-head').css('background-color', 'transparent');
