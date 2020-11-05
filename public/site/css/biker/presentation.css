@@ -32,6 +32,7 @@
     background: url("../../../assets/images/bikers/the-ride-academy.jpg") center center / cover no-repeat;
     height: 400px;
 }
+
 /* choice*/
 .choice{
     padding: 5% 0;
@@ -47,12 +48,73 @@
     display: flex;
     align-items: flex-end;
 }
+.text-align{
+    text-align: right;
+}
+
+/* earnings */
+.earnings{
+    background-color: #f2f1f1;
+}
+.earnings h2{
+    color: #2e3333;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+.earnings img{
+    max-height: 600px;
+}
+.block-cycle, .block-money, .block-help{
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 2%;
+}
+.block-cycle .fas, .block-money .fas, .block-help .fas{
+    margin-left: 2%;
+}
+.block-help .txt, .block-money .txt, .block-cycle .txt{
+    padding: 5%;
+}
+.block-cycle .fas{
+    color: #00ccbc;
+}
+.block-money .fas{
+    color: #ff7700;
+}
+.block-help .fas{
+    color: #01433e;
+}
+
+/* help */
+.help img{
+    max-height: 400px;
+    box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.5);
+}
+.help a{
+    color: #00ccbc;
+}
+.help a:hover{
+    color: #01433e;
+}
+.help .txt .txt-position{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /*align-items: stretch;*/
+    min-height: 400px;
+}
 
 /* responsive */
 @media screen and (max-width: 991px){
     /* punchline */
     .txt-position{
         width: 100%;
+    }
+    /* earnings */
+    .earnings img{
+        max-height: 400px;
     }
 }
 @media screen and (max-width: 768px){
@@ -65,11 +127,24 @@
     }
     .txt-position{
         width: 80%;
+        text-align: center;
     }
     .img-punchline:before{
         display: none;
     }
     .img-punchline{
         height: 250px;
+    }
+    /* section choice */
+    .choice .txt{
+        justify-content: center;
+    }
+    .text-align{
+        text-align: center;
+    }
+    /* section help */
+    .help .txt{
+        display: flex;
+        justify-content: center;
     }
 }
