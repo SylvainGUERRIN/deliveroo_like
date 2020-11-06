@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><script xmlns="">try {
+                        Object.defineProperty(screen, "availTop", { value: 0 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(screen, "availLeft", { value: 0 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(screen, "availWidth", { value: 1920 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(screen, "availHeight", { value: 1080 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(screen, "colorDepth", { value: 24 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(screen, "pixelDepth", { value: 24 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(navigator, "hardwareConcurrency", { value: 8 });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(navigator, "appVersion", { value: "5.0 (Windows)" });
+                    } catch (e) {}
+                    try {
+                        Object.defineProperty(navigator, "doNotTrack", { value: "unspecified" });
+                    } catch (e) {}
+                    
+            try {
+                window.screenY = 1072
+            } catch (e) { }
+        
+            try {
+                window.screenTop = 1072
+            } catch (e) { }
+        
+            try {
+                window.top.window.outerHeight = window.screen.height
+            } catch (e) { }
+        
+            try {
+                window.screenX = 0
+            } catch (e) { }
+        
+            try {
+                window.screenLeft = 0
+            } catch (e) { }
+        
+            try {
+                window.top.window.outerWidth = window.screen.width
+            } catch (e) { }
+        </script>
+  <g fill="none" fill-rule="evenodd">
+    <polygon fill="none" points="0 24 24 24 24 0 0 0"/>
+    <path fill="#B5EA44" d="M11.99998,21.59997 C6.70648,21.59997 2.39998,17.29347 2.39998,11.99997 C2.39998,6.70647 6.70648,2.39997 11.99998,2.39997 C17.29348,2.39997 21.59998,6.70647 21.59998,11.99997 C21.59998,17.29347 17.29348,21.59997 11.99998,21.59997 M11.99998,-3e-05 C5.37258,-3e-05 -2e-05,5.37267 -2e-05,11.99997 C-2e-05,18.62737 5.37258,23.99997 11.99998,23.99997 C18.62738,23.99997 23.99998,18.62737 23.99998,11.99997 C23.99998,5.37267 18.62738,-3e-05 11.99998,-3e-05"/>
+    <polygon fill="#B5EA44" points="16.8 6 9.6 13.2 7.2 10.8 4.8 13.2 9.6 18 19.2 8.4"/>
+  </g>
+</svg>

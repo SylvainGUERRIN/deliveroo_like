@@ -106,6 +106,82 @@
     min-height: 400px;
 }
 
+/* access */
+.access{
+    background-color: #fcfcfc;
+}
+.block-equipments, .block-star, .block-offers{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 2%;
+}
+.block-equipments .fas, .block-star .fas, .block-offers .fas{
+    margin-left: 2%;
+}
+.block-offers p, .block-star p, .block-equipments p{
+    padding: 2% 5%;
+}
+.block-equipments .fas{
+    color: #00ccbc;
+}
+.block-star .far{
+    color: #ff7700;
+}
+.block-offers .fas{
+    color: #01433e;
+}
+.access .txt{
+    background-color: #ffffff;
+    box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.5);
+    padding: 5%;
+}
+.access ul{
+    list-style: none;
+}
+.access li{
+    margin-bottom: 10px;
+    background: url("../../../assets/icones/tick_check.svg") no-repeat;
+    padding-left: 40px;
+}
+
+/* citation */
+.citation-txt{
+    background-color: #00ccbc;
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.citation-img{
+    position: relative;
+    background: url("../../../assets/images/bikers/the-ride-academy.jpg") center center / cover no-repeat;
+    height: 400px;
+}
+.citation-img:after{
+    content: '';
+    width: 100%;
+    height: 400px;
+    /*clip-path: polygon(0 0, 8% 0, 16% 100%, 0% 100%);*/
+    clip-path: polygon(73% 0, 100% 0, 100% 100%, 91% 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #00ccbc;
+}
+
+/* begin section */
+.begin{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.begin a{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* responsive */
 @media screen and (max-width: 991px){
     /* punchline */
@@ -146,5 +222,9 @@
     .help .txt{
         display: flex;
         justify-content: center;
+    }
+    /* section citation */
+    .citation-img:after{
+        display: none;
     }
 }
