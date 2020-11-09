@@ -32,4 +32,26 @@ class BikerController
     {
         return new Response($this->twig->render('biker/index.html.twig'));
     }
+
+    /**
+     * @Route("/biker-inscription/etape-une", name="biker_registration_step_one")
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function stepOne(): Response
+    {
+        return new Response($this->twig->render('biker/account/registration/registration-step-one.html.twig'));
+    }
+
+    /**
+     * @Route("/biker-inscription/etape-deux", name="biker_registration_step_two")
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function stepTwo(): Response
+    {
+        return new Response($this->twig->render('biker/account/registration/registration-step-two.html.twig'));
+    }
 }

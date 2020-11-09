@@ -1,0 +1,22 @@
+{% extends 'site/partials/base.html.twig' %}
+{% block title %}Roulez avec nous ! - Deliveroo-like{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('site/css/biker/registration.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="hero-two"></div>
+    <div class="bg-grey">
+        <div class="container container-form mt-5 mb-5">
+            <div class="row">
+                <div class="col-12 text-left">
+                    <h6>Etape <strong>2</strong> /3</h6>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

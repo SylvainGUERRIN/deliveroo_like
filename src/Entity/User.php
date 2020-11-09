@@ -602,7 +602,7 @@ class User implements UserInterface, \Serializable
     {
         $this->bikers = $bikers;
         // set (or unset) the owning side of the relation if necessary
-        $newOwner = null === $bikers ? null : $this;
+        $newBiker = null === $bikers ? null : $this;
         if ($bikers->getBiker() !== $newBiker) {
             $bikers->setBiker($newBiker);
         }

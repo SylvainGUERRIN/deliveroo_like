@@ -1,0 +1,21 @@
+.hero-one, .hero-two{
+    height: 306px;
+    padding: 16px;
+}
+.hero-one{
+    background: url("../../../assets/images/bikers/registration/j-williams.jpg") center center / cover no-repeat;
+}
+.hero-two{
+    background: url("../../../assets/images/bikers/registration/zbysiu.jpg") center center / cover no-repeat;
+}
+.bg-grey{
+    background-color: #dfe2e2;
+    padding: 5%;
+}
+.container-form{
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+.progress, .progress-bar{
+    height: 4px;
+}
