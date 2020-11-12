@@ -83,6 +83,10 @@ class SecurityController
      */
     public function mailRegistration(UserPasswordEncoderInterface $userPasswordEncoder): Response
     {
+        if ($this->security->isGranted('ROLE_USER')) {
+            return new RedirectResponse('/user-profile');
+        }
+
         $user = new User();
 
         $form = $this->form->create(RegistrationType::class, $user);
@@ -113,15 +117,14 @@ class SecurityController
     /**
      * @Route("/connexion", name="login")
      * @param AuthenticationUtils $helper
-     * @param Security $security
      * @return Response
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function login(AuthenticationUtils $helper, Security $security): Response
+    public function login(AuthenticationUtils $helper): Response
     {
-        if ($security->isGranted('ROLE_CONSUMER')) {
+        if ($this->security->isGranted('ROLE_USER')) {
             return new RedirectResponse('/user-profile');
         }
 

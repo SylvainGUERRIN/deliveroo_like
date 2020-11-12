@@ -8,6 +8,7 @@ use App\Form\RegistrationBikerType;
 use App\Form\RegistrationCityType;
 use App\Form\RegistrationType;
 use App\Repository\BikerRepository;
+use App\Repository\UserRepository;
 use App\Services\ManageBikerMultiStepsFormService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -28,6 +30,7 @@ class BikerController
     private $form;
     private $request;
     private $doctrine;
+    private $security;
 
     /**
      * BikerController constructor.
@@ -36,19 +39,23 @@ class BikerController
      * @param FormFactoryInterface $form
      * @param RequestStack $request
      * @param ManagerRegistry $registry
+     * @param Security $security
      */
     public function __construct(
         Environment $twig,
         ManageBikerMultiStepsFormService $bikerMultiStepsFormService,
         FormFactoryInterface $form,
         RequestStack $request,
-        ManagerRegistry $registry)
+        ManagerRegistry $registry,
+        Security $security
+    )
     {
         $this->twig = $twig;
         $this->bikerMultiStepsFormService = $bikerMultiStepsFormService;
         $this->form = $form;
         $this->request = $request;
         $this->doctrine = $registry;
+        $this->security = $security;
     }
 
     /**
@@ -72,6 +79,10 @@ class BikerController
      */
     public function stepOne(UserPasswordEncoderInterface $userPasswordEncoder): Response
     {
+        if ($this->security->isGranted('ROLE_USER')) {
+            return new RedirectResponse('/user-profile');
+        }
+
         //add logic for biker multi form service
         $this->bikerMultiStepsFormService->verifyStepInSession($step = 'one');
 
@@ -89,6 +100,9 @@ class BikerController
             $em = $this->doctrine->getManager();
             $em->persist($user);
             $em->flush();
+
+            $this->bikerMultiStepsFormService->saveStepOne($user->getId());
+
 //            $this->session->getFlashBag()->add(
 //                'success',
 //                'Votre compte a bien été créé ! Vous pouvez maintenant vous connecter !'
@@ -102,12 +116,18 @@ class BikerController
 
     /**
      * @Route("/biker-inscription/etape-deux", name="biker_registration_step_two")
+     * @param UserRepository $userRepository
+     * @return Response
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function stepTwo(): Response
+    public function stepTwo(UserRepository $userRepository): Response
     {
+        if ($this->security->isGranted('ROLE_USER')) {
+            return new RedirectResponse('/user-profile');
+        }
+
         //add logic for biker multi form service
         $this->bikerMultiStepsFormService->verifyStepInSession($step = 'two');
 
@@ -118,11 +138,15 @@ class BikerController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //don't forget relation with user, catch id with session
-
             $em = $this->doctrine->getManager();
             $em->persist($biker);
             $em->flush();
+
+            //don't forget relation with user, catch id with session
+            $userId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepOne());
+            $user = $userRepository->find($userId);
+            $user->setBikers($biker);
+            $em->persist($user);
 //            $this->session->getFlashBag()->add(
 //                'success',
 //                'Votre compte a bien été créé ! Vous pouvez maintenant vous connecter !'
@@ -144,9 +168,13 @@ class BikerController
      */
     public function stepThree(BikerRepository $bikerRepository): Response
     {
+        if ($this->security->isGranted('ROLE_USER')) {
+            return new RedirectResponse('/user-profile');
+        }
+
         //add logic for biker multi form service
-//        $bikerId = $this->bikerMultiStepsFormService
-//        $biker = $bikerRepository->find($bikerId);
+        $bikerId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepTwo());
+        $biker = $bikerRepository->find($bikerId);
 
         $form = $this->form->create(RegistrationCityType::class, $biker);
         $form->handleRequest($this->request->getCurrentRequest());
