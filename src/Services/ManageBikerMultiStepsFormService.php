@@ -5,6 +5,7 @@ namespace App\Services;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Security;
 
 /**
@@ -27,29 +28,35 @@ class ManageBikerMultiStepsFormService
 
     /**
      * @param $step
-     * @return RedirectResponse|void
+     * @return array|string|void
      */
     public function verifyStepInSession($step)
     {
         if($step === 'one'){
             if ($this->session->has('stepOne')) {
-                return new RedirectResponse('biker_registration_step_two');
+                return ['redirect','/biker-inscription/etape-deux'];
             }
+            if ($this->session->has('stepTwo')) {
+                return ['redirect','/biker-inscription/etape-trois'];
+            }
+            return null;
         }
 
         if($step === 'two'){
-            if($this->session->has('stepTwo')) {
-                return new RedirectResponse('biker_registration_step_three');
+            if(!$this->session->has('stepOne')) {
+                return ['redirect','/biker-inscription/etape-une'];
             }
+            return null;
         }
 
         if($step === 'three'){
             if(!$this->session->has('stepOne') && !$this->session->has('stepTwo')) {
-                return new RedirectResponse('biker_registration_step_one');
+                return ['redirect','/biker-inscription/etape-une'];
             }
             if ($this->session->has('stepOne') && !$this->session->has('stepTwo')) {
-                return new RedirectResponse('biker_registration_step_two');
+                return ['redirect','/biker-inscription/etape-deux'];
             }
+            return null;
         }
     }
 

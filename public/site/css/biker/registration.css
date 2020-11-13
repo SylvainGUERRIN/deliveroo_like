@@ -19,3 +19,12 @@
 .progress, .progress-bar{
     height: 4px;
 }
+.register-form{
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+.display-btn-submit{
+    display: flex;
+    justify-content: center;
+}

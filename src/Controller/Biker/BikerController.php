@@ -84,7 +84,10 @@ class BikerController
         }
 
         //add logic for biker multi form service
-        $this->bikerMultiStepsFormService->verifyStepInSession($step = 'one');
+        $manageSession = $this->bikerMultiStepsFormService->verifyStepInSession($step = 'one');
+        if($manageSession !== null){
+            return new RedirectResponse($manageSession[1]);
+        }
 
         $user = new User();
 
@@ -111,7 +114,9 @@ class BikerController
             return new RedirectResponse('biker_registration_step_two');
         }
 
-        return new Response($this->twig->render('biker/account/registration/registration-step-one.html.twig'));
+        return new Response($this->twig->render('biker/account/registration/registration-step-one.html.twig',[
+            'form' => $form->createView(),
+        ]));
     }
 
     /**
@@ -129,7 +134,10 @@ class BikerController
         }
 
         //add logic for biker multi form service
-        $this->bikerMultiStepsFormService->verifyStepInSession($step = 'two');
+        $manageSession = $this->bikerMultiStepsFormService->verifyStepInSession($step = 'two');
+        if($manageSession !== null){
+            return new RedirectResponse($manageSession[1]);
+        }
 
         $biker = new Biker();
 
@@ -172,8 +180,13 @@ class BikerController
             return new RedirectResponse('/user-profile');
         }
 
+        $manageSession = $this->bikerMultiStepsFormService->verifyStepInSession($step = 'three');
+        if($manageSession !== null){
+            return new RedirectResponse($manageSession[1]);
+        }
+
         //add logic for biker multi form service
-        $bikerId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepTwo());
+        /*$bikerId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepTwo());
         $biker = $bikerRepository->find($bikerId);
 
         $form = $this->form->create(RegistrationCityType::class, $biker);
@@ -192,7 +205,7 @@ class BikerController
 //            );
 
             return new RedirectResponse('login');
-        }
+        }*/
 
         return new Response($this->twig->render('biker/account/registration/registration-step-three.html.twig'));
     }

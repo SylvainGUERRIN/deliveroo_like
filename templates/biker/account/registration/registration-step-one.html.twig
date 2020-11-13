@@ -15,6 +15,49 @@
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: 35%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
+                    <h1 class="text-center mt-3">S'inscrire</h1>
+                </div>
+                <div class="register-form">
+                    {{ form_start(form) }}
+                    <div class="row pt-5">
+                        <div class="col-2">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="col-10">
+                            {{ form_row(form.firstName) }}
+                            {{ form_row(form.lastName) }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-2">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="col-10">
+                            {{ form_label(form.email) }}
+                            {{ form_widget(form.email) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-2">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="col-10">
+                            {{ form_label(form.password) }}
+                            {{ form_row(form.password) }}
+                        </div>
+                        <div class="col-12 text-center">
+                            <small>Votre mot de passe doit contenir au minimum 8 caractères.</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 display-btn-submit mb-4">
+                            <button type="submit" class="btn btn-blue">S'inscrire</button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>
