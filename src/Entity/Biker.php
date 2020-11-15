@@ -243,20 +243,20 @@ class Biker
     }
 
     /**
-     * @return Biker|null
+     * @return User|null
      */
-    public function getBiker(): ?Biker
+    public function getBiker(): ?User
     {
         return $this->biker;
     }
 
     /**
-     * @param Biker|null $biker
+     * @param User|null $user
      * @return $this
      */
-    public function setBiker(?Biker $biker): self
+    public function setBiker(?User $user): self
     {
-        $this->biker = $biker;
+        $this->biker = $user;
         return $this;
     }
 }

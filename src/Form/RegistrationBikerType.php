@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Biker;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,8 +19,13 @@ class RegistrationBikerType extends AbstractType
     {
         $builder
             ->add('enterpriseCode')
-            ->add('rightToCreateEnterprise')
-            ->add('birthdayDate')
+            ->add('rightToCreateEnterprise', CheckboxType::class,[
+                'label'    => 'Avez-vous le droit de créer une entreprise ?',
+                'required' => true,
+            ])
+            ->add('birthdayDate', DateType::class, [
+                'widget' => 'single_text'
+            ])
             ->add('sponsorship')
             ->add('iban')
             ->add('transportation')

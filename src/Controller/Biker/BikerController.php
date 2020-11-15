@@ -8,13 +8,16 @@ use App\Form\RegistrationBikerType;
 use App\Form\RegistrationCityType;
 use App\Form\RegistrationType;
 use App\Repository\BikerRepository;
+use App\Repository\CityRepository;
 use App\Repository\UserRepository;
 use App\Services\ManageBikerMultiStepsFormService;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
@@ -98,7 +101,7 @@ class BikerController
             $hashPass = $userPasswordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hashPass);
             $user->setCreatedAt(new \DateTimeImmutable('now'));
-            $user->setRole(['ROLE_USER']);
+            $user->setRole(['ROLE_BIKER']);
 
             $em = $this->doctrine->getManager();
             $em->persist($user);
@@ -111,7 +114,7 @@ class BikerController
 //                'Votre compte a bien été créé ! Vous pouvez maintenant vous connecter !'
 //            );
 
-            return new RedirectResponse('biker_registration_step_two');
+            return new RedirectResponse('/biker-inscription/etape-deux');
         }
 
         return new Response($this->twig->render('biker/account/registration/registration-step-one.html.twig',[
@@ -133,6 +136,8 @@ class BikerController
             return new RedirectResponse('/user-profile');
         }
 
+//        dump($session->get('stepOne'));
+
         //add logic for biker multi form service
         $manageSession = $this->bikerMultiStepsFormService->verifyStepInSession($step = 'two');
         if($manageSession !== null){
@@ -147,34 +152,44 @@ class BikerController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->doctrine->getManager();
-            $em->persist($biker);
-            $em->flush();
+
+            $this->bikerMultiStepsFormService->saveStepTwo($biker->getId());
 
             //don't forget relation with user, catch id with session
             $userId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepOne());
             $user = $userRepository->find($userId);
-            $user->setBikers($biker);
-            $em->persist($user);
+
+            $biker->setBiker($user);
+            $em->persist($biker);
+            $em->flush();
+
 //            $this->session->getFlashBag()->add(
 //                'success',
 //                'Votre compte a bien été créé ! Vous pouvez maintenant vous connecter !'
 //            );
 
-            return new RedirectResponse('biker_registration_step_three');
+            return new RedirectResponse('/biker-inscription/etape-trois');
         }
 
-        return new Response($this->twig->render('biker/account/registration/registration-step-two.html.twig'));
+        return new Response($this->twig->render('biker/account/registration/registration-step-two.html.twig',[
+            'form' => $form->createView()
+        ]));
     }
 
     /**
      * @Route("/biker-inscription/etape-trois", name="biker_registration_step_three")
      * @param BikerRepository $bikerRepository
+     * @param CityRepository $cityRepository
      * @return Response
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws NonUniqueResultException
      */
-    public function stepThree(BikerRepository $bikerRepository): Response
+    public function stepThree(
+        BikerRepository $bikerRepository,
+        CityRepository $cityRepository
+    ): Response
     {
         if ($this->security->isGranted('ROLE_USER')) {
             return new RedirectResponse('/user-profile');
@@ -185,28 +200,38 @@ class BikerController
             return new RedirectResponse($manageSession[1]);
         }
 
+        //dump($session->get('stepTwo'));
+
         //add logic for biker multi form service
-        /*$bikerId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepTwo());
+        $bikerId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepTwo());
+        //dump($bikerId);
         $biker = $bikerRepository->find($bikerId);
+        //dump($biker);
 
         $form = $this->form->create(RegistrationCityType::class, $biker);
         $form->handleRequest($this->request->getCurrentRequest());
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            //don't forget relation with biker, catch id with session
+            $city = $form["cityworkwith"]->getData();
+            $cityInBdd = $cityRepository->findByName($city);
+            //when add js for city, don't forget to add form error if name is not good
             //and add city to biker entity
-
             $em = $this->doctrine->getManager();
+            $biker->setCityWorkWith($cityInBdd);
             $em->persist($biker);
 //            $this->session->getFlashBag()->add(
 //                'success',
 //                'Votre compte a bien été créé ! Vous pouvez maintenant vous connecter !'
 //            );
 
-            return new RedirectResponse('login');
-        }*/
+            //clean session
+            $this->bikerMultiStepsFormService->cleanStepsInSession();
 
-        return new Response($this->twig->render('biker/account/registration/registration-step-three.html.twig'));
+            return new RedirectResponse('/connexion');
+        }
+
+        return new Response($this->twig->render('biker/account/registration/registration-step-three.html.twig',[
+            'form' => $form->createView(),
+        ]));
     }
 }

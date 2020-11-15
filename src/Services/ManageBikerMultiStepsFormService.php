@@ -93,4 +93,10 @@ class ManageBikerMultiStepsFormService
     {
         return $this->session->get('stepTwo');
     }
+
+    public function cleanStepsInSession(): void
+    {
+        $this->session->remove('stepOne');
+        $this->session->remove('stepTwo');
+    }
 }

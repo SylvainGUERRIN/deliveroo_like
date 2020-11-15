@@ -15,6 +15,74 @@
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
+                    <div class="register-form">
+                        {{ form_start(form) }}
+                        <div class="row pt-5">
+                            <div class="col-2">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="col-10">
+                                {{ form_row(form.enterpriseCode) }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="col-10">
+                                {{ form_label(form.rightToCreateEnterprise) }}
+                                {{ form_widget(form.rightToCreateEnterprise) }}
+                                {{ form_errors(form.rightToCreateEnterprise) }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="col-10">
+                                {{ form_label(form.birthdayDate) }}
+                                {{ form_row(form.birthdayDate) }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="col-10">
+                                {{ form_label(form.sponsorship) }}
+                                {{ form_row(form.sponsorship) }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="col-10">
+                                {{ form_label(form.iban) }}
+                                {{ form_row(form.iban) }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="col-10">
+                                {{ form_label(form.transportation) }}
+                                {{ form_row(form.transportation) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 display-btn-submit mb-4">
+                                <button type="submit" class="btn btn-blue">Passer à la dernière étape</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
                 </div>
             </div>
         </div>
