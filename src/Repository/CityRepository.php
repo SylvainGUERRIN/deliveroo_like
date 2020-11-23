@@ -27,7 +27,6 @@ class CityRepository extends ServiceEntityRepository
     /**
      * @param $name
      * @return int|mixed|string|null
-     * @throws NonUniqueResultException
      */
     public function findByName($name)
     {
@@ -35,7 +34,21 @@ class CityRepository extends ServiceEntityRepository
             ->where('c.name = :val')
             ->setParameter('val', $name)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @param $search
+     * @return int|mixed|string
+     */
+    public function searchCity($search)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.name LIKE :val')
+            ->setParameter('val', '%' . $search . '%')
+            ->getQuery()
+            ->getResult()
             ;
     }
 }

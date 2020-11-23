@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,14 +28,17 @@ class SiteController
 
     /**
      * @Route("/", name="home")
+     * @param CategoryRepository $categoryRepository
      * @return Response
      * @throws LoaderError
-     * @throws SyntaxError
      * @throws RuntimeError
+     * @throws SyntaxError
      */
-    public function home(): Response
+    public function home(CategoryRepository $categoryRepository): Response
     {
-        return new Response($this->twig->render('site/home.html.twig'));
+        return new Response($this->twig->render('site/home.html.twig',[
+            'categories' => $categoryRepository->findAll()
+        ]));
     }
 
     /**

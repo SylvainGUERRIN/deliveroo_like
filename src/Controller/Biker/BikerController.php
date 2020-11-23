@@ -4,6 +4,7 @@ namespace App\Controller\Biker;
 
 use App\Entity\Biker;
 use App\Entity\User;
+use App\Form\GetCityType;
 use App\Form\RegistrationBikerType;
 use App\Form\RegistrationCityType;
 use App\Form\RegistrationType;
@@ -14,7 +15,9 @@ use App\Services\ManageBikerMultiStepsFormService;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -153,8 +156,6 @@ class BikerController
 
             $em = $this->doctrine->getManager();
 
-            $this->bikerMultiStepsFormService->saveStepTwo($biker->getId());
-
             //don't forget relation with user, catch id with session
             $userId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepOne());
             $user = $userRepository->find($userId);
@@ -162,6 +163,8 @@ class BikerController
             $biker->setBiker($user);
             $em->persist($biker);
             $em->flush();
+
+            $this->bikerMultiStepsFormService->saveStepTwo($biker->getId());
 
 //            $this->session->getFlashBag()->add(
 //                'success',
@@ -184,7 +187,6 @@ class BikerController
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws NonUniqueResultException
      */
     public function stepThree(
         BikerRepository $bikerRepository,
@@ -200,20 +202,25 @@ class BikerController
             return new RedirectResponse($manageSession[1]);
         }
 
-        //dump($session->get('stepTwo'));
+//        dump($session->get('stepTwo'));
 
-        //add logic for biker multi form service
-        $bikerId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepTwo());
-        //dump($bikerId);
-        $biker = $bikerRepository->find($bikerId);
-        //dump($biker);
-
-        $form = $this->form->create(RegistrationCityType::class, $biker);
+        $form = $this->form->create(GetCityType::class);
         $form->handleRequest($this->request->getCurrentRequest());
+        // add form manually in controller and template to remove GetCityType
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $city = $form["cityworkwith"]->getData();
-            $cityInBdd = $cityRepository->findByName($city);
+            //add logic for biker multi form service
+            $bikerId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepTwo());
+            $biker = $bikerRepository->find((int)$bikerId);
+
+            $city = $form["cityName"]->getData();
+//            dump($form["cityWorkWith"]->getData());
+//            dump($form->getData());
+//            dump($city);
+            $cityInBdd = $cityRepository->findByName($city->getName());
+//            dump($cityInBdd->getId());
+//            dump($biker);
+//            dd($cityInBdd);
             //when add js for city, don't forget to add form error if name is not good
             //and add city to biker entity
             $em = $this->doctrine->getManager();
@@ -233,5 +240,31 @@ class BikerController
         return new Response($this->twig->render('biker/account/registration/registration-step-three.html.twig',[
             'form' => $form->createView(),
         ]));
+    }
+
+    /**
+     * @Route("/city-search", name="city_search")
+     * @param Request $request
+     * @param CityRepository $cityRepository
+     * @return JsonResponse|RedirectResponse
+     */
+    public function searchCityWithAjax(Request $request, CityRepository $cityRepository)
+    {
+        if($request->isXmlHttpRequest()){
+//            $data = '';
+            $value = $request->get('value');
+            $search = $cityRepository->searchCity($value);
+            $cityArray = [];
+            if(count($search) > 1){
+                foreach ($search as $s){
+                   $cityArray[] = [$s->getName(), $s->getZipCode() ];
+                }
+            }
+
+            return new JsonResponse([
+                $cityArray
+            ]);
+        }
+        return new RedirectResponse('/');
     }
 }

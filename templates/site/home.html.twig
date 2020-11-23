@@ -223,15 +223,11 @@
                 <h1>Vous voulez plus de choix ?</h1>
 {#                add dynamic categories    #}
                 <ul class="categories">
+                    {% for category in categories %}
                     <li>
-                        <a href="#">Halal</a>
+                        <a href="#">{{ category.name }}</a>
                     </li>
-                    <li>
-                        <a href="#">Petit déjeuner</a>
-                    </li>
-                    <li>
-                        <a href="#">Végétarien</a>
-                    </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
