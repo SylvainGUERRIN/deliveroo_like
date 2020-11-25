@@ -3,6 +3,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('site/css/biker/registration.css') }}">
+    <link rel="stylesheet" href="{{ asset('site/css/search-city.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -26,13 +27,13 @@
 {#                            {{ form_row(form.cityName) }}#}
                             <input type="text" id="get_city_cityName" class="form-control">
 {#                            ul for predictive responses       #}
-                            <div class="renderList">
+                            <div id="renderList">
 {#                                let empty after tests         #}
-                                <ul>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                </ul>
+{#                                <ul>#}
+{#                                    <li></li>#}
+{#                                    <li></li>#}
+{#                                    <li></li>#}
+{#                                </ul>#}
                             </div>
                         </div>
                     </div>

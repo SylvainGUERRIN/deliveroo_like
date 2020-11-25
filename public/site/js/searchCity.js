@@ -20,8 +20,20 @@ $(document).ready(function () {
     // }
 
     fieldCity.addEventListener('input', function () {
+        //add set timeout (3s) to avoid double list
+
         //console.log(fieldCity.value)
         if(fieldCity.value.length > 3){
+            //div to nest list
+            let divRenderList = document.getElementById('renderList')
+
+            //manage if list are already creating remove list
+            let listAlreadyExist = document.getElementById('cityList')
+            //console.log(listAlreadyExist)
+            if(listAlreadyExist !== null){
+                divRenderList.removeChild(listAlreadyExist)
+            }
+
             //console.log(fieldCity.value)
             $.ajax({
                     url: '/city-search',
@@ -31,26 +43,39 @@ $(document).ready(function () {
                     async: true,
 
                     success: function (data) {
-                        console.log(data[0])
-                        let ul = document.createElement('ul')
-                        ul.setAttribute('id','cityList')
+                        //console.log(data[0])
+                        //city list
                         let cityList = data[0]
 
-                        document.getElementById('renderList')
+                        //create ul
+                        let ul = document.createElement('ul')
+                        ul.setAttribute('id','cityList')
+
+                        // document.body.appendChild()
+                        divRenderList.appendChild(ul)
+
+                        //foreach to fill each li
                         cityList.forEach(renderCitiesList)
 
                         function renderCitiesList(element, index, arr){
                             let li = document.createElement('li')
                             li.setAttribute('class', 'item')
-
                             ul.appendChild(li)
 
-                            let t = document.createTextNode(element)
+                            let button = document.createElement('button')
+                            button.setAttribute('class', 'btn btn-blue')
+                            let cityName = element[0]
+                            button.setAttribute('id', cityName)
+                            li.appendChild(button)
 
-                            li.innerHTML = li.innerHTML + element
+                            // let t = document.createTextNode(element)
+                            console.log(element)
+                            // console.log(t)
+
+                            button.innerHTML = button.innerHTML + element
                         }
                     }
-                })
+            })
         }
     })
 

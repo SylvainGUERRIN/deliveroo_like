@@ -1,0 +1,14 @@
+#cityList{
+    padding-left: 0;
+    overflow-y: scroll;
+    height: 200px;
+}
+
+#cityList .item{
+    list-style-type: none;
+}
+
+#cityList .item .btn{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
