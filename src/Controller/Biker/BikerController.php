@@ -204,27 +204,59 @@ class BikerController
 
 //        dump($session->get('stepTwo'));
 
-        $form = $this->form->create(GetCityType::class);
-        $form->handleRequest($this->request->getCurrentRequest());
+//        $form = $this->form->create(GetCityType::class);
+//        $form->handleRequest($this->request->getCurrentRequest());
         // add form manually in controller and template to remove GetCityType
 
-        if ($form->isSubmitted() && $form->isValid()) {
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            //add logic for biker multi form service
+//            $bikerId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepTwo());
+//            $biker = $bikerRepository->find((int)$bikerId);
+//
+//            $city = $form["cityName"]->getData();
+////            dump($form["cityWorkWith"]->getData());
+////            dump($form->getData());
+////            dump($city);
+//            $cityInBdd = $cityRepository->findByName($city->getName());
+////            dump($cityInBdd->getId());
+////            dump($biker);
+////            dd($cityInBdd);
+//            //when add js for city, don't forget to add form error if name is not good
+//            //and add city to biker entity
+//            $em = $this->doctrine->getManager();
+//            $biker->setCityWorkWith($cityInBdd);
+//            $em->persist($biker);
+////            $this->session->getFlashBag()->add(
+////                'success',
+////                'Votre compte a bien été créé ! Vous pouvez maintenant vous connecter !'
+////            );
+//
+//            //clean session
+//            $this->bikerMultiStepsFormService->cleanStepsInSession();
+//
+//            return new RedirectResponse('/connexion');
+//        }
+
+        if ($this->request->getCurrentRequest()->getMethod() === 'POST') {
             //add logic for biker multi form service
             $bikerId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepTwo());
             $biker = $bikerRepository->find((int)$bikerId);
 
-            $city = $form["cityName"]->getData();
+            $city = $this->request->getCurrentRequest()->request->get('get_city_cityName');
+            $zipCode = $this->request->getCurrentRequest()->request->get('zip-code');
+//            $city = $form["cityName"]->getData();
 //            dump($form["cityWorkWith"]->getData());
 //            dump($form->getData());
 //            dump($city);
-            $cityInBdd = $cityRepository->findByName($city->getName());
+            $cityInBdd = $cityRepository->findByNameAndZipCode($city, $zipCode);
+            dd($cityInBdd); //digg why don't set city work with
 //            dump($cityInBdd->getId());
 //            dump($biker);
 //            dd($cityInBdd);
             //when add js for city, don't forget to add form error if name is not good
             //and add city to biker entity
             $em = $this->doctrine->getManager();
-            $biker->setCityWorkWith($cityInBdd);
+            $biker->setCityWorkWith($cityInBdd[0]);
             $em->persist($biker);
 //            $this->session->getFlashBag()->add(
 //                'success',
@@ -238,7 +270,7 @@ class BikerController
         }
 
         return new Response($this->twig->render('biker/account/registration/registration-step-three.html.twig',[
-            'form' => $form->createView(),
+//            'form' => $form->createView(),
         ]));
     }
 

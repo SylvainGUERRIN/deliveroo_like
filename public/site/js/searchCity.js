@@ -1,7 +1,8 @@
 $(document).ready(function () {
-    let fieldCity = document.getElementById('get_city_cityName');
-    console.log(fieldCity)
-    console.log(fieldCity.value.length)
+    let fieldCity = document.getElementById('get_city_cityName')
+    let fieldZip = document.getElementById('zip-code')
+    // console.log(fieldCity)
+    // console.log(fieldCity.value.length)
 
     // if(fieldCity.value.length > 3){
     //     var matchValue = $(this).value;
@@ -19,8 +20,64 @@ $(document).ready(function () {
     //     // })
     // }
 
+    // //put name value of city in form field when user click on a button in list
+    // let cityName = document.getElementsByClassName('city-name')
+    // console.log(cityName)
+
+    // cityName.onclick = function () {
+    //     console.log(cityName)
+    //     let nameOfCity = this.attributes('id')
+    //     console.log(nameOfCity)
+    // }
+    //
+    // if(cityName.length > 0){
+    //     console.log(cityName.length)
+    //     cityName.addEventListener('click', function (e) {
+    //         e.preventDefault()
+    //         let nameOfCity = this.attributes('id')
+    //         console.log(nameOfCity)
+    //
+    //     })
+    // }
+    // $(".city-name").addEventListener("click", function (e) {
+    //     // e.preventDefault()
+    //     let nameOfCity = this.attributes('id')
+    //     console.log(nameOfCity)
+    //
+    // })
+
+    //put name value of city in form field when user click on a button in list
+    $(document).on("click", '.city-name', function (e) {
+        e.preventDefault()
+        let nameOfCity = $(this).attr('id')
+        let arrayCity = nameOfCity.split('-')
+        console.log(nameOfCity)
+        fieldCity.value = arrayCity[0]
+        fieldZip.value = arrayCity[1]
+    })
+
+    // document.getElementsByClassName('city-name').addEventListener('click', function (e) {
+    //     e.preventDefault()
+    //     let nameOfCity = this.attributes('id')
+    //     console.log(nameOfCity)
+    // } )
+
+    //listener on city form field
     fieldCity.addEventListener('input', function () {
         //add set timeout (3s) to avoid double list
+
+        //put name value of city in form field when user click on a button in list
+        // let cityName = document.getElementsByClassName('city-name')
+
+        // if(cityName.length > 0){
+        //     console.log(cityName.length)
+        //     $('.city-name').on('click', function (e) {
+        //         e.preventDefault()
+        //         let nameOfCity = this.attributes('id')
+        //         console.log(nameOfCity)
+        //
+        //     })
+        // }
 
         //console.log(fieldCity.value)
         if(fieldCity.value.length > 3){
@@ -63,13 +120,13 @@ $(document).ready(function () {
                             ul.appendChild(li)
 
                             let button = document.createElement('button')
-                            button.setAttribute('class', 'btn btn-blue')
+                            button.setAttribute('class', 'btn btn-blue city-name')
                             let cityName = element[0]
-                            button.setAttribute('id', cityName)
+                            button.setAttribute('id', cityName + '-' + element[1])
                             li.appendChild(button)
 
                             // let t = document.createTextNode(element)
-                            console.log(element)
+                            //console.log(element)
                             // console.log(t)
 
                             button.innerHTML = button.innerHTML + element

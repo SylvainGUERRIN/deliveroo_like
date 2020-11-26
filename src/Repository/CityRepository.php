@@ -39,6 +39,23 @@ class CityRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param $name
+     * @param $zipCode
+     * @return int|mixed|string|null
+     */
+    public function findByNameAndZipCode($name, $zipCode)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.name = :val')
+            ->andWhere('c.zipCode = :zip')
+            ->setParameter('val', $name)
+            ->setParameter('zip', $zipCode)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
      * @param $search
      * @return int|mixed|string
      */
