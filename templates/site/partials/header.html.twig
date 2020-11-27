@@ -78,6 +78,14 @@
                         </li>
                     {% endif %}
                 {% else %}
+                    {% if is_granted('ROLE_BIKER') %}
+                        <li class="nav-item">
+                            <a class="btn btn-white" href="{{ path('biker_dashboard') }}">
+                                <i class="fas fa-home"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="btn btn-white" href="{{ path('profile') }}">
                             <i class="fas fa-home"></i>

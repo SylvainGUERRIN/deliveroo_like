@@ -37,6 +37,7 @@ class BikerController
     private $request;
     private $doctrine;
     private $security;
+    private $session;
 
     /**
      * BikerController constructor.
@@ -46,6 +47,7 @@ class BikerController
      * @param RequestStack $request
      * @param ManagerRegistry $registry
      * @param Security $security
+     * @param SessionInterface $session
      */
     public function __construct(
         Environment $twig,
@@ -53,7 +55,8 @@ class BikerController
         FormFactoryInterface $form,
         RequestStack $request,
         ManagerRegistry $registry,
-        Security $security
+        Security $security,
+        SessionInterface $session
     )
     {
         $this->twig = $twig;
@@ -62,6 +65,7 @@ class BikerController
         $this->request = $request;
         $this->doctrine = $registry;
         $this->security = $security;
+        $this->session = $session;
     }
 
     /**
@@ -241,6 +245,7 @@ class BikerController
             //add logic for biker multi form service
             $bikerId = str_replace('jgkfg564g86f53g4dfdez4586q','',$this->bikerMultiStepsFormService->getStepTwo());
             $biker = $bikerRepository->find((int)$bikerId);
+            //dump($biker);
 
             $city = $this->request->getCurrentRequest()->request->get('get_city_cityName');
             $zipCode = $this->request->getCurrentRequest()->request->get('zip-code');
@@ -249,8 +254,8 @@ class BikerController
 //            dump($form->getData());
 //            dump($city);
             $cityInBdd = $cityRepository->findByNameAndZipCode($city, $zipCode);
-            dd($cityInBdd); //digg why don't set city work with
-//            dump($cityInBdd->getId());
+//            dd($cityInBdd[0]->getId()); //digg why don't set city work with
+            //dump($cityInBdd[0]->getId());
 //            dump($biker);
 //            dd($cityInBdd);
             //when add js for city, don't forget to add form error if name is not good
@@ -258,6 +263,9 @@ class BikerController
             $em = $this->doctrine->getManager();
             $biker->setCityWorkWith($cityInBdd[0]);
             $em->persist($biker);
+            $em->flush(); //if don't use flush, it's not save in bdd
+
+            //dd($biker);
 //            $this->session->getFlashBag()->add(
 //                'success',
 //                'Votre compte a bien été créé ! Vous pouvez maintenant vous connecter !'
@@ -265,6 +273,11 @@ class BikerController
 
             //clean session
             $this->bikerMultiStepsFormService->cleanStepsInSession();
+
+            $this->session->getFlashBag()->add(
+                'success',
+                'Votre compte a bien été créé ! Vous pouvez maintenant vous connecter !'
+            );
 
             return new RedirectResponse('/connexion');
         }
