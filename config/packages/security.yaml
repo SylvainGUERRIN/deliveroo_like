@@ -13,6 +13,22 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        admin:
+            pattern: ^/deliv-admin
+            anonymous: true
+
+            provider: in_database
+
+            form_login:
+                login_path: admin_connexion
+                check_path: admin_connexion
+                default_target_path: admin_dashboard
+                always_use_default_target_path: true
+                csrf_token_generator: security.csrf.token_manager
+
+                logout:
+                    path: admin_deconnexion
+                    target: admin_connexion
         user:
             pattern: ^/
             anonymous: true
@@ -50,3 +66,10 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/deliv-admin/account/connexion, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/deliv-admin/account/inscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/deliv-admin/account/forgotten, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/deliv-admin/account/recuperation-password/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # role admin requis pour le back
+        - { path: ^/deliv-admin, roles: ROLE_ADMIN }
+        - { path: ^/deliv-admin/administration, roles: ROLE_ADMIN }
