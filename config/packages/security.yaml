@@ -26,9 +26,9 @@ security:
                 always_use_default_target_path: true
                 csrf_token_generator: security.csrf.token_manager
 
-                logout:
-                    path: admin_deconnexion
-                    target: admin_connexion
+            logout:
+                path: admin_deconnexion
+                target: admin_connexion
         user:
             pattern: ^/
             anonymous: true
@@ -38,7 +38,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                default_target_path: profile
+                default_target_path: admin_dashboard
                 always_use_default_target_path: true
                 csrf_token_generator: security.csrf.token_manager
 
@@ -60,14 +60,14 @@ security:
         ROLE_BIKER: ROLE_USER
         ROLE_MANAGER: ROLE_USER
         ROLE_OWNER: ROLE_USER
-        ROLE_ADMIN: [ROLE_USER, ROLE_CONSUMER, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN: [ROLE_USER, ROLE_CONSUMER, ROLE_BIKER, ROLE_MANAGER, ROLE_OWNER, ROLE_ALLOWED_TO_SWITCH]
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/deliv-admin/account/connexion, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/deliv-admin/account/inscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/deliv-admin/account/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/deliv-admin/account/forgotten, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/deliv-admin/account/recuperation-password/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         # role admin requis pour le back

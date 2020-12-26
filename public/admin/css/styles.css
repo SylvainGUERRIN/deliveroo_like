@@ -1,0 +1,123 @@
+/* general */
+body{
+    font-family: 'IBM Plex Sans', sans-serif;
+    position: relative;
+}
+h1{
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+a{
+    color: #ffffff;
+}
+a p{
+    color: #000000;
+}
+a .link{
+    color: #00ccbc;
+}
+a:hover{
+    color: #00ccbc;
+    text-decoration: none;
+}
+::-moz-selection {
+    background: #00ccbc;
+}
+::selection {
+    background: #00ccbc;
+}
+.bold-span{
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-size: 2rem;
+    color: #ffffff;
+    opacity: 1;
+    text-align: center;
+}
+
+/*header*/
+.header-admin{
+    background-color: #000000;
+}
+
+/*navbar*/
+.navbar{
+    background-color: #000000;
+}
+
+/*pagination*/
+.nav-pagination{
+    display: flex;
+    justify-content: center;
+}
+.pagination a{
+    color: #000000 !important;
+}
+.page-item.active .page-link{
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+}
+
+/*cards*/
+.bg-color{
+    background-color: #999999;
+}
+.display-stretch{
+    display: flex;
+    align-items: stretch;
+}
+
+/*footer*/
+footer{
+    background-color: #000000;
+}
+
+/* upload image */
+.img-preview-none{
+    display: none;
+}
+.img-preview-active{
+    display: block;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+.custom-file-label::after{
+    content: 'Parcourir' !important;
+}
+.bottom-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* buttons */
+.btn{
+    display: flex!important;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.btn-white{
+    background-color: #ffffff;
+    border: 1px solid #838686;
+    border-radius: 5px;
+    color: #838686;
+}
+.btn-white:hover{
+    border-color: #2a2f2f;
+}
+.btn-white:hover .fa-home, .btn-white:hover .fa-hamburger{
+    color: #018177;
+}
+.btn-blue{
+    background-color: #00ccbc;
+    border: 1px solid #00ccbc;
+    border-radius: 5px;
+    color: #ffffff;
+}
+.btn-blue:hover{
+    background-color: #01433e;
+    border-color: #01433e;
+    color: #ffffff;
+}
