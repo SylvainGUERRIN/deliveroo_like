@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller;
-
 
 use App\Entity\User;
 use App\Form\AccountType;
@@ -26,6 +24,11 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
+/**
+ * Class SecurityController
+ * @package App\Controller
+ * @Route("/user/account")
+ */
 class SecurityController
 {
     private $twig;

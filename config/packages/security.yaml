@@ -9,6 +9,7 @@ security:
     encoders:
         App\Entity\User:
             algorithm: auto
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -19,28 +20,35 @@ security:
 
             provider: in_database
 
-            form_login:
-                login_path: admin_connexion
-                check_path: admin_connexion
-                default_target_path: admin_dashboard
-                always_use_default_target_path: true
-                csrf_token_generator: security.csrf.token_manager
+            guard:
+                authenticators:
+                    - App\Security\Guard\AdminAuthenticator
+#            form_login:
+#                login_path: admin_connexion
+#                check_path: admin_connexion
+#                default_target_path: admin_dashboard
+#                always_use_default_target_path: true
+#                csrf_token_generator: security.csrf.token_manager
 
             logout:
                 path: admin_deconnexion
                 target: admin_connexion
         user:
-            pattern: ^/
+            pattern: ^/user
             anonymous: true
 
             provider: in_database
 
-            form_login:
-                login_path: login
-                check_path: login
-                default_target_path: admin_dashboard
-                always_use_default_target_path: true
-                csrf_token_generator: security.csrf.token_manager
+            guard:
+                authenticators:
+                    - App\Security\Guard\UserAuthenticator
+            context: website_context
+#            form_login:
+#                login_path: login
+#                check_path: login
+#                default_target_path: profile
+#                always_use_default_target_path: true
+#                csrf_token_generator: security.csrf.token_manager
 
             logout:
                 path: logout
@@ -48,6 +56,7 @@ security:
         main:
             anonymous: lazy
             provider: in_database
+            context: website_context
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -56,11 +65,11 @@ security:
             # switch_user: true
 
     role_hierarchy:
+        ROLE_ADMIN: [ ROLE_USER, ROLE_CONSUMER, ROLE_BIKER, ROLE_MANAGER, ROLE_OWNER, ROLE_ALLOWED_TO_SWITCH ]
         ROLE_CONSUMER: ROLE_USER
         ROLE_BIKER: ROLE_USER
         ROLE_MANAGER: ROLE_USER
         ROLE_OWNER: ROLE_USER
-        ROLE_ADMIN: [ROLE_USER, ROLE_CONSUMER, ROLE_BIKER, ROLE_MANAGER, ROLE_OWNER, ROLE_ALLOWED_TO_SWITCH]
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
