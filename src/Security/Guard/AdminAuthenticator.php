@@ -117,7 +117,7 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException('It\'s an invalid token csrf');
         }
-        return $this->userRepository->findOneBy(['mail' => $credentials['mail']]);
+        return $this->userRepository->findOneBy(['email' => $credentials['mail']]);
     }
 
     /**
