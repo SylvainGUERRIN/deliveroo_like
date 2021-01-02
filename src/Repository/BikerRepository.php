@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Biker;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,5 +20,20 @@ class BikerRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Biker::class);
+    }
+
+    /**
+     * @param $userID
+     * @return int|mixed|string|null
+     * @throws NonUniqueResultException
+     */
+    public function findByUserId($userID)
+    {
+        return $this->createQueryBuilder('b')
+            ->where('b.biker = :val')
+            ->setParameter('val', $userID)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
     }
 }

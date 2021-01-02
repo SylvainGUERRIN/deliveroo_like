@@ -1,32 +1,34 @@
 
 //do with this or get biker city to display weather ?
-function geoloc(){ // ou tout autre nom de fonction
-    var geoSuccess = function(position) { // Ceci s'exécutera si l'utilisateur accepte la géolocalisation
+function geoLocalization(){
+    var geoSuccess = function(position) {
+        // on acceptation
         startPos = position;
-        userlat = startPos.coords.latitude;
-        userlon = startPos.coords.longitude;
-        console.log("lat: "+userlat+" - lon: "+userlon);
+        userLat = startPos.coords.latitude;
+        userLon = startPos.coords.longitude;
+        console.log("lat: "+ userLat +" - lon: "+ userLon );
     };
-    var geoFail = function(){ // Ceci s'exécutera si l'utilisateur refuse la géolocalisation
-        console.log("refus");
+    var geoFail = function(){
+        //on reject
+        console.log("reject");
     };
-    // La ligne ci-dessous cherche la position de l'utilisateur et déclenchera la demande d'accord
+    // search position if acceptation
     navigator.geolocation.getCurrentPosition(geoSuccess,geoFail);
 }
 
-geoloc()
+geoLocalization()
 
-function chercher(){
-    var ville = $("#ville").val();
-    if(ville != ""){
+function search(){
+    var city = $("#city").val();
+    if(city !== ""){
         $.ajax({
-            url: "https://nominatim.openstreetmap.org/search", // URL de Nominatim
-            type: 'get', // Requête de type GET
-            data: "q="+ville+"&format=json&addressdetails=1&limit=1&polygon_svg=1" // Données envoyées (q -> adresse complète, format -> format attendu pour la réponse, limit -> nombre de réponses attendu, polygon_svg -> fournit les données de polygone de la réponse en svg)
+            url: "https://nominatim.openstreetmap.org/search", // Nominatim url to search with Open Street Map data
+            type: 'get',
+            data: "q="+ city +"&format=json&addressdetails=1&limit=1&polygon_svg=1" // Données envoyées (q -> adresse complète, format -> format attendu pour la réponse, limit -> nombre de réponses attendu, polygon_svg -> fournit les données de polygone de la réponse en svg)
         }).done(function (response) {
-            if(response !== ""){
-                userlat = response[0]['lat'];
-                userlon = response[0]['lon'];
+            if (response !== "") {
+                userLat = response[0]['lat'];
+                userLon = response[0]['lon'];
             }
         }).fail(function (error) {
             alert(error);
@@ -34,15 +36,14 @@ function chercher(){
     }
 }
 
-function cercle(){ // Ou tout autre nom de fonction
-    var distance = $("#distance").val(); // Nous récupérons la distance
+function around(){
+    var distance = $("#distance").val();
     $.ajax({
-        url:'http://localhost/carte/cherchevilles.php',
+        url:'http://localhost/search-city', //change road
         type: 'POST',
-        data: 'lat='+userlat+'&lon='+userlon+'&distance='+distance
-    }).done(function(reponse){
-        var points = JSON.parse(reponse);
-        // Ici nous traitons les différents points
+        data: 'lat='+ userLat + '&lon=' + userLon + '&distance='+distance
+    }).done(function(response){
+        var points = JSON.parse(response);
     }).fail (function(error){
         console.log(error);
     });
