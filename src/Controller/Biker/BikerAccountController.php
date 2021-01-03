@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
@@ -66,12 +67,12 @@ class BikerAccountController
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
-     * @throws NonUniqueResultException
+     * @throws NonUniqueResultException|DecodingExceptionInterface
      */
     public function dashboard(OpenWeatherService $openWeatherService): Response
     {
         $userID = $this->security->getUser()->getId();
-        $getWeather = $openWeatherService->getWeather($userID);
+        $getWeather = $openWeatherService->getBikerTime($userID, 'oneDay');
         dump($getWeather);
         return new Response($this->twig->render('biker/dashboard.html.twig', [
             'weather' => $getWeather

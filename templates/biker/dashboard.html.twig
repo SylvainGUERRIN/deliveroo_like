@@ -41,9 +41,18 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col">
-                                {{ dump(weather) }}
-                                {{ weather.icon }}
-                                <a href="#" class="btn btn-color">Voir les prévisions sur la semaine</a>
+{#                                {{ dump(weather) }}#}
+{#                                {{ dump(weather['weather']) }}#}
+{#                                {{ dump(weather["icon"]) }}#}
+{#                                {{ weather.icon }}#}
+                                <img src="http://openweathermap.org/img/wn/{{ weather.weather[0].icon }}@2x.png" alt="">
+                                <h4>{{ weather.name }}</h4>
+                                <p>
+                                    Température: {{ weather.main.temp }}° <br>
+                                    Température ressentie: {{ weather.main.feels_like }}°
+                                </p>
+                                <p>{{ weather.weather[0].description }}</p>
+                                <a href="#" class="btn btn-blue">Voir les prévisions sur la semaine</a>
                             </div>
                         </div>
                     </div>
