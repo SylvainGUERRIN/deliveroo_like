@@ -2,6 +2,7 @@
 
 namespace App\Controller\Biker;
 
+use App\Repository\BikerRepository;
 use App\Services\OpenWeatherService;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -29,6 +30,7 @@ class BikerAccountController
     private $doctrine;
     private $security;
     private $session;
+    private $bikerRepository;
 
     /**
      * BikerController constructor.
@@ -38,6 +40,7 @@ class BikerAccountController
      * @param ManagerRegistry $registry
      * @param Security $security
      * @param SessionInterface $session
+     * @param BikerRepository $bikerRepository
      */
     public function __construct(
         Environment $twig,
@@ -45,7 +48,8 @@ class BikerAccountController
         RequestStack $request,
         ManagerRegistry $registry,
         Security $security,
-        SessionInterface $session
+        SessionInterface $session,
+        BikerRepository $bikerRepository
     )
     {
         $this->twig = $twig;
@@ -54,6 +58,7 @@ class BikerAccountController
         $this->doctrine = $registry;
         $this->security = $security;
         $this->session = $session;
+        $this->bikerRepository = $bikerRepository;
     }
 
     /**
@@ -75,6 +80,32 @@ class BikerAccountController
         $getWeather = $openWeatherService->getBikerTime($userID, 'oneDay');
         dump($getWeather);
         return new Response($this->twig->render('biker/dashboard.html.twig', [
+            'weather' => $getWeather
+        ]));
+    }
+
+    /**
+     * @Route ("biker/weather", name="biker_weather")
+     * @param OpenWeatherService $openWeatherService
+     * @return Response
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws LoaderError
+     * @throws NonUniqueResultException
+     * @throws RedirectionExceptionInterface
+     * @throws RuntimeError
+     * @throws ServerExceptionInterface
+     * @throws SyntaxError
+     * @throws TransportExceptionInterface
+     */
+    public function weatherFourWeeks(OpenWeatherService $openWeatherService): Response
+    {
+        $userID = $this->security->getUser()->getId();
+        $biker = $this->bikerRepository->findByUserId($userID);
+        $getWeather = $openWeatherService->getBikerTime($userID, 'manyDay');
+        dump($getWeather);
+        return new Response($this->twig->render('biker/weather.html.twig', [
+            'biker' => $biker,
             'weather' => $getWeather
         ]));
     }

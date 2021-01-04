@@ -52,7 +52,7 @@
                                     Température ressentie: {{ weather.main.feels_like }}°
                                 </p>
                                 <p>{{ weather.weather[0].description }}</p>
-                                <a href="#" class="btn btn-blue">Voir les prévisions sur la semaine</a>
+                                <a href="{{ path('biker_weather') }}" class="btn btn-blue">Voir les prévisions sur la semaine</a>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,44 @@
+{% extends 'site/partials/base.html.twig' %}
+{% block title %}Votre dashboard - Deliveroo-like{% endblock %}
+
+{#{% block stylesheets %}#}
+{#    <link rel="stylesheet" href="{{ asset('site/css/biker/registration.css') }}">#}
+{#    <link rel="stylesheet" href="{{ asset('site/css/search-city.css') }}">#}
+{#{% endblock %}#}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <h1>Le temps des sept prochains jours sur {{ biker.cityWorkWith.name }}</h1>
+            </div>
+        </div>
+        <div class="row mt-3 mb-5">
+            {% for day in weather['daily'] %}
+            <div class="col">
+                <div class="card bg-color mb-3 text-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <img src="http://openweathermap.org/img/wn/{{ day.weather[0].icon }}@2x.png" alt="">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <p>
+                                    {{ day.dt|date("m/d/Y", "Europe/Paris") }}
+                                    {{ day.weather[0].description }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{#{% block javascripts %}#}
+{#    <script src="{{ asset('biker/js/dashboard.js') }}"></script>#}
+{#{% endblock %}#}

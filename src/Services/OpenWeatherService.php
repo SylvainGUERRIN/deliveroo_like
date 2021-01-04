@@ -47,13 +47,31 @@ class OpenWeatherService
     /**
      * @param $city
      * @return ResponseInterface
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
     public function getWeatherOfWeek($city): ResponseInterface
     {
+        // i need lat and lon because i have free account in open weather
+        //i use open cage data api to get lat and lon
+
+        $coordinatesResponse = $this->client->request(
+            'GET',
+            'https://api.opencagedata.com/geocode/v1/json?q=' . $city . '&key=' . $_ENV['OPEN_CAGE_DATA']
+        );
+        $coordinates = $coordinatesResponse->toArray();
+//        dd($coordinates);
+
+        $lat = $coordinates['results'][0]['geometry']['lat'];
+        $lon = $coordinates['results'][0]['geometry']['lng'];
+
         return $this->client->request(
             'GET',
-            'https://pro.openweathermap.org/data/2.5/forecast/hourly?q=' . $city . '&units=metric&lang=fr&appid=' . $_ENV['OPEN_WEATHER_MAP_KEY']
+            'https://api.openweathermap.org/data/2.5/onecall?lat=' . $lat . '&lon=' . $lon . '&units=metric&lang=fr&appid=' . $_ENV['OPEN_WEATHER_MAP_KEY']
+//            'https://api.openweathermap.org/data/2.5/forecast/daily?q=' . $city . '&units=metric&lang=fr&cnt=7&appid=' . $_ENV['OPEN_WEATHER_MAP_KEY']
         );
     }
 
@@ -85,9 +103,11 @@ class OpenWeatherService
             }
 
             if($response->getStatusCode() === 200){
-                return $response->toArray(); //put api data here
+                return $response->toArray();
 //                return $response->getContent(); //put api data here
             }
+
+            return false;
         }
 
         return false;
