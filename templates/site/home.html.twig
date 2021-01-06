@@ -18,7 +18,7 @@
                         Vos restaurants préférés, livrés chez vous en un clic
                     </h1>
                     <div class="form-search">
-                        <form action="">
+                        <form action="{{ path('home') }}" method="post">
                             <div class="form-group row">
                                 <label for="inputSearch" class="col-12 col-form-label">
                                     <small>
@@ -26,12 +26,15 @@
                                     </small>
                                 </label>
                                 <div class="col-sm-8 field-search">
-                                    <input type="text" class="form-control" id="inputSearch">
+{#                                    <input type="text" class="form-control" id="inputSearch">#}
+                                    <input type="text" id="get_city_cityName" name="get_city_cityName" class="form-control">
+                                    <input type="hidden" id="zip-code" name="zip-code">
                                     <span>
                                         <svg height="24" width="24" viewBox="0 0 24 24">
                                             <path d="M2 11.8214L21 3L12.1786 22L10.1429 13.8571L2 11.8214ZM11.7882 12.2118L12.7455 16.0408L16.8936 7.10644L7.95923 11.2545L11.7882 12.2118Z"></path>
                                         </svg>
                                     </span>
+                                    <div id="renderList"></div>
                                 </div>
                                 <div class="col-sm-4">
                                     <button class="btn btn-blue" type="submit">Rechercher</button>
@@ -312,9 +315,10 @@
     </section>
 {% endblock %}
 
-{#{% block javascripts %}#}
+{% block javascripts %}
 {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>#}
 {#    <script src="{{ asset('js/filterizr-jquery.js') }}"></script>#}
 {#    <script src="{{ asset('js/home.js') }}"></script>#}
 {#    <script src="{{ asset('js/addToCart.js') }}"></script>#}
-{#{% endblock %}#}
+    <script src="{{ asset('site/js/searchCity.js') }}"></script>
+{% endblock %}

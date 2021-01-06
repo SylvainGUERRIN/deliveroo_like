@@ -45,6 +45,7 @@ $(document).ready(function () {
     //     console.log(nameOfCity)
     //
     // })
+    let divRenderList = document.getElementById('renderList')
 
     //put name value of city in form field when user click on a button in list
     $(document).on("click", '.city-name', function (e) {
@@ -54,6 +55,7 @@ $(document).ready(function () {
         console.log(nameOfCity)
         fieldCity.value = arrayCity[0]
         fieldZip.value = arrayCity[1]
+        divRenderList.style.display = 'none'
     })
 
     // document.getElementsByClassName('city-name').addEventListener('click', function (e) {
@@ -82,7 +84,8 @@ $(document).ready(function () {
         //console.log(fieldCity.value)
         if(fieldCity.value.length > 3){
             //div to nest list
-            let divRenderList = document.getElementById('renderList')
+            //let divRenderList = document.getElementById('renderList')
+            divRenderList.style.display = 'block'
 
             //manage if list are already creating remove list
             let listAlreadyExist = document.getElementById('cityList')

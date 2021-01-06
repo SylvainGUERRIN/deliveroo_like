@@ -103,10 +103,22 @@ class BikerAccountController
         $userID = $this->security->getUser()->getId();
         $biker = $this->bikerRepository->findByUserId($userID);
         $getWeather = $openWeatherService->getBikerTime($userID, 'manyDay');
-        dump($getWeather);
+        //dump($getWeather);
         return new Response($this->twig->render('biker/weather.html.twig', [
             'biker' => $biker,
             'weather' => $getWeather
         ]));
+    }
+
+    /**
+     * @Route("biler/courses", name="biker_courses")
+     * @return Response
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function courses(): Response
+    {
+        return new Response($this->twig->render('biker/courses.html.twig'));
     }
 }

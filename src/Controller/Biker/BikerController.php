@@ -286,30 +286,4 @@ class BikerController
 //            'form' => $form->createView(),
         ]));
     }
-
-    /**
-     * @Route("/city-search", name="city_search")
-     * @param Request $request
-     * @param CityRepository $cityRepository
-     * @return JsonResponse|RedirectResponse
-     */
-    public function searchCityWithAjax(Request $request, CityRepository $cityRepository)
-    {
-        if($request->isXmlHttpRequest()){
-//            $data = '';
-            $value = $request->get('value');
-            $search = $cityRepository->searchCity($value);
-            $cityArray = [];
-            if(count($search) > 1){
-                foreach ($search as $s){
-                   $cityArray[] = [$s->getName(), $s->getZipCode() ];
-                }
-            }
-
-            return new JsonResponse([
-                $cityArray
-            ]);
-        }
-        return new RedirectResponse('/');
-    }
 }
