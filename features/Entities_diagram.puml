@@ -106,7 +106,7 @@ package "Entities" #FFF {
         {field} enabled: boolean
         {field} published: boolean
         {field} createdAt: dateTimeInterface
-        {field} categories: relation
+        {field} category: relation
     }
 
     class StripeClient {
@@ -187,7 +187,7 @@ package "Entities" #FFF {
 
     PaymentMethod "One" --* "Many" Order : To
 
-    Restaurant "Many" *--* "Many" Category : To
+    Restaurant "Many" *--* "One" Category : To
     Restaurant "One" --* "One" User : To
     Restaurant "One" --* "Many" User : To
     Restaurant "One" *--* "Many" DisLike : To

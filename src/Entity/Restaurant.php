@@ -54,11 +54,6 @@ class Restaurant
     private $createdAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="restaurants")
-     */
-    private $categories;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="owners", cascade={"persist", "remove"})
      */
     private $owner;
@@ -104,11 +99,25 @@ class Restaurant
     private $stripeClient;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $siren;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $delivery;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="restaurant")
+     */
+    private $category;
+
+    /**
      * Restaurant constructor.
      */
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
         $this->managers = new ArrayCollection();
         $this->disLikes = new ArrayCollection();
         $this->likes = new ArrayCollection();
@@ -266,37 +275,37 @@ class Restaurant
         return $this;
     }
 
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    /**
-     * @param Category $category
-     * @return $this
-     */
-    public function addCategory(Category $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-        }
-        return $this;
-    }
-
-    /**
-     * @param Category $category
-     * @return $this
-     */
-    public function removeCategory(Category $category): self
-    {
-        if ($this->categories->contains($category)) {
-            $this->categories->removeElement($category);
-        }
-        return $this;
-    }
+//    /**
+//     * @return Collection|Category[]
+//     */
+//    public function getCategories(): Collection
+//    {
+//        return $this->categories;
+//    }
+//
+//    /**
+//     * @param Category $category
+//     * @return $this
+//     */
+//    public function addCategory(Category $category): self
+//    {
+//        if (!$this->categories->contains($category)) {
+//            $this->categories[] = $category;
+//        }
+//        return $this;
+//    }
+//
+//    /**
+//     * @param Category $category
+//     * @return $this
+//     */
+//    public function removeCategory(Category $category): self
+//    {
+//        if ($this->categories->contains($category)) {
+//            $this->categories->removeElement($category);
+//        }
+//        return $this;
+//    }
 
     /**
      * @return User|null
@@ -557,6 +566,42 @@ class Restaurant
     public function setStripeClient(?StripeClient $stripeClient): self
     {
         $this->stripeClient = $stripeClient;
+        return $this;
+    }
+
+    public function getSiren(): ?string
+    {
+        return $this->siren;
+    }
+
+    public function setSiren(string $siren): self
+    {
+        $this->siren = $siren;
+
+        return $this;
+    }
+
+    public function getDelivery(): ?string
+    {
+        return $this->delivery;
+    }
+
+    public function setDelivery(string $delivery): self
+    {
+        $this->delivery = $delivery;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
         return $this;
     }
 }

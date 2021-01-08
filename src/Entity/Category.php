@@ -35,10 +35,15 @@ class Category
      */
     private $menus;
 
+//    /**
+//     * @ORM\ManyToMany(targetEntity="App\Entity\Restaurant", mappedBy="categories")
+//     */
+//    private $restaurants;
+
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Restaurant", mappedBy="categories")
+     * @ORM\OneToMany(targetEntity=Restaurant::class, mappedBy="category")
      */
-    private $restaurants;
+    private $restaurant;
 
     /**
      * Category constructor.
@@ -46,6 +51,7 @@ class Category
     public function __construct()
     {
         $this->menus = new ArrayCollection();
+        $this->restaurant = new ArrayCollection();
     }
 
     /**
@@ -130,45 +136,53 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Collection|Restaurant[]
-     */
-    public function getRestaurants(): Collection
-    {
-        return $this->restaurants;
-    }
+//    /**
+//     * @return Collection|Restaurant[]
+//     */
+//    public function getRestaurants(): Collection
+//    {
+//        return $this->restaurants;
+//    }
 
-    /**
-     * @param Restaurant $restaurant
-     * @return $this
-     */
-    public function addRestaurant(Restaurant $restaurant): self
-    {
-        if (!$this->restaurants->contains($restaurant)) {
-            $this->restaurants[] = $restaurant;
-            $restaurant->addCategory($this);
-        }
-        return $this;
-    }
-
-    /**
-     * @param Restaurant $restaurant
-     * @return $this
-     */
-    public function removeRestaurant(Restaurant $restaurant): self
-    {
-        if ($this->restaurants->contains($restaurant)) {
-            $this->restaurants->removeElement($restaurant);
-            $restaurant->removeCategory($this);
-        }
-        return $this;
-    }
+//    /**
+//     * @param Restaurant $restaurant
+//     * @return $this
+//     */
+//    public function addRestaurant(Restaurant $restaurant): self
+//    {
+//        if (!$this->restaurants->contains($restaurant)) {
+//            $this->restaurants[] = $restaurant;
+//            $restaurant->addCategory($this);
+//        }
+//        return $this;
+//    }
+//
+//    /**
+//     * @param Restaurant $restaurant
+//     * @return $this
+//     */
+//    public function removeRestaurant(Restaurant $restaurant): self
+//    {
+//        if ($this->restaurants->contains($restaurant)) {
+//            $this->restaurants->removeElement($restaurant);
+//            $restaurant->removeCategory($this);
+//        }
+//        return $this;
+//    }
 
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->name;
+    }
+
+    /**
+     * @return Collection|Restaurant[]
+     */
+    public function getRestaurant(): Collection
+    {
+        return $this->restaurant;
     }
 }
