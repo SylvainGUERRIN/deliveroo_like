@@ -98,11 +98,6 @@ class User implements UserInterface, \Serializable
     private $orders;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Restaurant", cascade={"persist", "remove"})
-     */
-    private $restaurant;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Restaurant", mappedBy="owner", cascade={"persist", "remove"})
      */
     private $owners;
@@ -493,24 +488,6 @@ class User implements UserInterface, \Serializable
     /**
      * @return Restaurant|null
      */
-    public function getRestaurant(): ?Restaurant
-    {
-        return $this->restaurant;
-    }
-
-    /**
-     * @param Restaurant|null $restaurant
-     * @return $this
-     */
-    public function setRestaurant(?Restaurant $restaurant): self
-    {
-        $this->restaurant = $restaurant;
-        return $this;
-    }
-
-    /**
-     * @return Restaurant|null
-     */
     public function getOwners(): ?Restaurant
     {
         return $this->owners;
@@ -612,7 +589,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->firstName;
     }

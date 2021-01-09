@@ -29,12 +29,12 @@ class Restaurant
     private $number;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="time", nullable=true)
      */
     private $opensAt;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="time", nullable=true)
      */
     private $closesAt;
 

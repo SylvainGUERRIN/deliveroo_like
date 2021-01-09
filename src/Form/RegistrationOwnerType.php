@@ -44,6 +44,13 @@ class RegistrationOwnerType extends AbstractType
         ;
 
         $builder
+            ->add('restaurant', RestaurantType::class, [
+                'data_class' => Restaurant::class,
+                'label' => 'Votre restaurant'
+            ])
+        ;
+
+        $builder
             ->add('name', TextType::class, [
                 'data_class' => Address::class,
                 'required' => true,
@@ -64,16 +71,9 @@ class RegistrationOwnerType extends AbstractType
             ])
             ->add('line2', TextType::class, [
                 'data_class' => Address::class,
-                'required' => true,
+                'required' => false,
                 'label' =>'Adresse complémentaire',
                 'attr' => ['placeholder' => 'Si besoin, vous pouvez compléter votre adresse']
-            ])
-        ;
-
-        $builder
-            ->add('restaurant', RestaurantType::class, [
-                'data_class' => Restaurant::class,
-                'label' => false
             ])
         ;
 
