@@ -3,13 +3,16 @@
 {% block title %}Devenir partenaire - Deliveroo_like{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('site/css/registration.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
+    <link rel="stylesheet" href="{{ asset('site/css/owner/registration-owner.css') }}">
 {% endblock %}
 
 {% block body %}
-<div class="container mt-5 mb-5">
+<div class="container-fluid mt-5 mb-5 background-form">
     <div class="row">
-        <div class="col-12 registration">
+        <div class="col-sm-12 col-lg-6 registration">
             <h3 class="text-center mb-5">Devenir partenaire</h3>
             {{ form_start(form) }}
 
@@ -25,13 +28,62 @@
             </div>
             {{ form_end(form) }}
         </div>
+        <div class="col-sm-12 col-lg-6 slider-frame">
+            <div class="blocks owl-carousel">
+                <div class="block">
+                    <img src="{{ asset('assets/images/owner/registration/slider/slide-1.jpg') }}" alt="" class="img-carousel">
+                </div>
+                <div class="block">
+                    <img src="{{ asset('assets/images/owner/registration/slider/slide-2.jpg') }}" alt="" class="img-carousel">
+                </div>
+                <div class="block">
+                    <img src="{{ asset('assets/images/owner/registration/slider/slide-3.jpg') }}" alt="" class="img-carousel">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-5 mb-5">
+    <h1>Pourquoi devenir partenaire ?</h1>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="card">
+                <h5>Culpa maiores quasi veritatis!</h5>
+                <img src="{{ asset('assets/images/owner/registration/icons/bar-chart.svg') }}" alt="">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto atque consequatur modi
+                    nostrum perspiciatis praesentium quam quos tenetur. Amet at culpa doloribus explicabo illum maxime
+                    reiciendis similique tenetur vitae.
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="card">
+                <h5>Culpa maiores quasi veritatis!</h5>
+                <img src="{{ asset('assets/images/owner/registration/icons/bar-chart.svg') }}" alt="">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto atque consequatur modi
+                    nostrum perspiciatis praesentium quam quos tenetur. Amet at culpa doloribus explicabo illum maxime
+                    reiciendis similique tenetur vitae.
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="card">
+                <h5>Culpa maiores quasi veritatis!</h5>
+                <img src="{{ asset('assets/images/owner/registration/icons/bar-chart.svg') }}" alt="">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto atque consequatur modi
+                    nostrum perspiciatis praesentium quam quos tenetur. Amet at culpa doloribus explicabo illum maxime
+                    reiciendis similique tenetur vitae.
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
 
-{#{% block javascripts %}#}
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>#}
-{#    <script src="{{ asset('js/filterizr-jquery.js') }}"></script>#}
-{#    <script src="{{ asset('js/home.js') }}"></script>#}
-{#    <script src="{{ asset('js/addToCart.js') }}"></script>#}
-{#{% endblock %}#}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="{{ asset('site/js/owner/registration-owner.js') }}"></script>
+{% endblock %}

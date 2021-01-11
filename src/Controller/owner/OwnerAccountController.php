@@ -74,11 +74,6 @@ class OwnerAccountController
             return new RedirectResponse('/user-profile');
         }
 
-//        $user = new User();
-//        $restaurant = new Restaurant();
-//        $address = new Address();
-//        $city = new City();
-
         $form = $this->form->create(RegistrationOwnerType::class);
         $form->handleRequest($this->request->getCurrentRequest());
 
