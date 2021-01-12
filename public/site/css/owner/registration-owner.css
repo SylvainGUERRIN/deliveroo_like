@@ -2,19 +2,8 @@
 .background-form{
     position: relative;
 }
-.background-form::before{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: -30%;
-    height: 100%;
-    background:
-            url('data:image/svg+xml;utf8,<svg width="1121" height="630" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M.5 710l817.07-326.926L708.082 0H1120.5v630H.5z" fill="%2300CCBC"/></svg>')
-            center center / cover no-repeat;
-    /*background-size: cover;*/
-}
 .slider-frame{
-    /*position: absolute;*/
+    position: relative;
     z-index: 1;
     /*top: 12%;*/
     /*left: 0;*/
@@ -26,6 +15,25 @@
     max-height: 900px;
     width: 100%;
 }
+.background-form::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    /*left: 0;*/
+    right: 0;
+    /*right: -30%;*/
+    height: 1280px;
+    width: 1280px;
+    /*min-height: 500px;*/
+    /*width: 100%;*/
+    background:
+            url('../../../assets/images/owner/registration/blue-background.svg')
+            top right / cover no-repeat;
+    /*background:*/
+    /*        url('data:image/svg+xml;utf8,<svg width="1121" height="630" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M.5 710l817.07-326.926L708.082 0H1120.5v630H.5z" fill="%2300CCBC"/></svg>')*/
+    /*        center center / cover no-repeat;*/
+    /*background-size: cover;*/
+}
 .block img{
     object-fit: cover;
     min-height: 900px;
@@ -33,10 +41,31 @@
 }
 
 /* section cards */
+.cards{
+    margin-top: 5rem;
+}
 .card{
+    padding: 2%;
     box-shadow: 0 20px 62px 0 rgba(0, 0, 0, 0.19);
 }
 .card img{
     width: 25%;
     height: 25%;
+    margin: 0 auto;
+}
+
+/* numbers */
+.round{
+    background-color: #00ccbc;
+    border-radius: 50%;
+    width: 128px;
+    height: 128px;
+    margin: 0 auto;
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+}
+.round img{
+    width: 50%;
+    margin: 0 auto;
 }
