@@ -34,7 +34,7 @@
     /*        center center / cover no-repeat;*/
     /*background-size: cover;*/
 }
-.block img{
+.slider-frame .block img{
     object-fit: cover;
     min-height: 900px;
     /*max-height: 700px;*/
@@ -44,11 +44,11 @@
 .cards{
     margin-top: 5rem;
 }
-.card{
+.cards .card{
     padding: 2%;
     box-shadow: 0 20px 62px 0 rgba(0, 0, 0, 0.19);
 }
-.card img{
+.cards .card img{
     width: 25%;
     height: 25%;
     margin: 0 auto;
@@ -68,4 +68,100 @@
 .round img{
     width: 50%;
     margin: 0 auto;
+}
+
+/* slider partnership */
+.testimonial-slide{
+    display: flex;
+    position: relative;
+    /*flex-wrap: wrap;*/
+    flex-direction: row;
+    align-items: center;
+}
+.icon{
+    width: 15%!important;
+}
+/*.block-txt{*/
+/*    width: 80%;*/
+/*    display: block;*/
+/*    margin: 0 auto;*/
+/*}*/
+.txt::before{
+    content: '';
+    width: 40px;
+    height: 32px;
+    background: url("../../../assets/images/owner/registration/partnership-slider/left-quote.svg") center center / contain no-repeat;
+    position: absolute;
+    /*top: 0;*/
+    top: 30%;
+    left: -46px;
+}
+.txt{
+    position: relative;
+    margin-left: 10%;
+    margin-right: 10%;
+    /*width: 80%;*/
+    /*display: block;*/
+    /*margin: 0 auto;*/
+}
+
+/* section list */
+.checks{
+    list-style-type: none;
+}
+.checks li{
+    position: relative;
+    padding-left: 3%;
+    margin-bottom: 2.5%;
+}
+.checks li::before{
+    position: absolute;
+    top: 1px;
+    left: 0;
+    content: '';
+    width: 23px;
+    height: 23px;
+    background: url("../../../assets/images/owner/registration/icons/checked.svg") no-repeat;
+    background-size: contain;
+}
+
+/* section how it work */
+.work-card{
+    box-shadow: 0 20px 62px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+}
+.work-card img{
+    width: 64px;
+    height: 64px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* section leads */
+.card-lead{
+    transition: all 0.2s ease;
+}
+.card-lead:hover{
+    transform: translateY(-4px);
+}
+.card-lead .card-body{
+    position: relative;
+}
+.card-lead img{
+    width: 100%;
+    max-height: 230px;
+    object-fit: cover;
+}
+.card-lead .card-title::before{
+    content: '';
+    width: 100%;
+    height: 35px;
+    clip-path: polygon(100% 5%, 0% 100%, 100% 100%);
+    background: #ffffff;
+    /*-webkit-transform: rotate(-6deg);*/
+    /*transform: rotate(-6deg);*/
+    position: absolute;
+    top: -35px;
+    left: 0;
+    z-index: 1;
 }
