@@ -10,6 +10,7 @@ use App\Form\RegistrationOwnerType;
 use App\Form\RegistrationType;
 use App\Repository\BikerRepository;
 use App\Repository\CityRepository;
+use App\Repository\RestaurantRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -135,6 +136,22 @@ class OwnerAccountController
 
         return new Response($this->twig->render('owner/registration.html.twig',[
             'form' => $form->createView(),
+        ]));
+    }
+
+    /**
+     * @Route ("/owner/dashboard", name="owner_dashboard")
+     * @param RestaurantRepository $restaurantRepository
+     * @return Response
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function OwnerDashboard(RestaurantRepository $restaurantRepository): Response
+    {
+        //dump($this->security->getUser());
+        return new Response($this->twig->render('owner/dashboard.html.twig', [
+            'restaurant' => $this->security->getUser()->getOwners()
         ]));
     }
 }

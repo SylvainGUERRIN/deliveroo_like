@@ -1,0 +1,31 @@
+{% extends 'site/partials/base.html.twig' %}
+{% block title %}Votre restaurant - Deliveroo-like{% endblock %}
+
+{#{% block stylesheets %}#}
+    {#    <link rel="stylesheet" href="{{ asset('site/css/biker/registration.css') }}">#}
+    {#    <link rel="stylesheet" href="{{ asset('site/css/search-city.css') }}">#}
+{#{% endblock %}#}
+
+{% block body %}
+    <div class="container mt-5 mb-5">
+        {{ form_start(form) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.number) }}
+        {{ form_row(form.opensAt) }}
+        {{ form_row(form.closesAt) }}
+        {{ form_row(form.category) }}
+        {{ form_row(form.siren) }}
+        {{ form_row(form.delivery) }}
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-blue">Enregistrer les modifications</button>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{#{% block javascripts %}#}
+{#    <script src="{{ asset('biker/js/dashboard.js') }}"></script>#}
+{#{% endblock %}#}

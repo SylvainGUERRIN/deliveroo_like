@@ -1,0 +1,101 @@
+{% extends 'site/partials/base.html.twig' %}
+{% block title %}Votre dashboard - Deliveroo-like{% endblock %}
+
+{% block stylesheets %}
+{#    <link rel="stylesheet" href="{{ asset('site/css/biker/registration.css') }}">#}
+{#    <link rel="stylesheet" href="{{ asset('site/css/search-city.css') }}">#}
+    <style>
+        .msg{
+            color: #FFFFFF;
+            border-radius: 10px;
+            padding: 2%;
+        }
+        .green{
+            background-color: #026b62;
+        }
+        .yellow{
+            background-color: #f8b329;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-12 text-center">
+            <h1>Votre tableau de bord</h1>
+        </div>
+    </div>
+    <div class="row mt-3 mb-5">
+        {% set values = [] %}
+        {% if restaurant.enabled == true and restaurant.published == true %}
+            {% set values = {
+                'color' : 'green',
+                'txt' : 'a été validé.'
+            } %}
+        {% else %}
+            {% set values = {
+                'color' : 'yellow',
+                'txt' : 'est en cours de validation.'
+            } %}
+        {% endif %}
+        <div class="col-12 mb-5 text-center msg {{ values.color }}">
+            <h1>Votre restaurant {{ values.txt }}</h1>
+{#            {{ dump(values) }}#}
+{#            {{ dump(restaurant) }}#}
+        </div>
+        <div class="col">
+            <div class="card bg-color mb-3 text-center">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="card-title">Votre restaurant</h1>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <a href="{{ path('owner_restaurant_details') }}" class="btn btn-blue">Accéder aux détails de votre restaurant.</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-color mb-3 text-center">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="card-title">Vos menus</h1>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <a href="#" class="btn btn-blue">Voir la liste de vos menus.</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-color mb-3 text-center">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="card-title">Les avis sur votre restaurant</h1>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <a href="#" class="btn btn-blue">Voir les avis sur votre restaurant.</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{#{% block javascripts %}#}
+{#    <script src="{{ asset('biker/js/dashboard.js') }}"></script>#}
+{#{% endblock %}#}

@@ -86,6 +86,14 @@
                             </a>
                         </li>
                     {% endif %}
+                    {% if is_granted('ROLE_OWNER') %}
+                        <li class="nav-item">
+                            <a class="btn btn-white" href="{{ path('owner_dashboard') }}">
+                                <i class="fas fa-home"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="btn btn-white" href="{{ path('profile') }}">
                             <i class="fas fa-home"></i>
