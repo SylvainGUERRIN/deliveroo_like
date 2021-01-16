@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\Controller;
 
-
-use App\Services\ManageBikerMultiStepsFormService;
+use App\Repository\CityRepository;
+use App\Repository\RestaurantRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -20,40 +19,40 @@ use Twig\Error\SyntaxError;
 class RestaurantsController
 {
     private $twig;
-    private $bikerMultiStepsFormService;
     private $form;
     private $request;
     private $doctrine;
     private $security;
     private $session;
+    private $cityRepository;
 
     /**
      * BikerController constructor.
      * @param Environment $twig
-     * @param ManageBikerMultiStepsFormService $bikerMultiStepsFormService
      * @param FormFactoryInterface $form
      * @param RequestStack $request
      * @param ManagerRegistry $registry
      * @param Security $security
      * @param SessionInterface $session
+     * @param CityRepository $cityRepository
      */
     public function __construct(
         Environment $twig,
-        ManageBikerMultiStepsFormService $bikerMultiStepsFormService,
         FormFactoryInterface $form,
         RequestStack $request,
         ManagerRegistry $registry,
         Security $security,
-        SessionInterface $session
+        SessionInterface $session,
+        CityRepository $cityRepository
     )
     {
         $this->twig = $twig;
-        $this->bikerMultiStepsFormService = $bikerMultiStepsFormService;
         $this->form = $form;
         $this->request = $request;
         $this->doctrine = $registry;
         $this->security = $security;
         $this->session = $session;
+        $this->cityRepository = $cityRepository;
     }
 
     /**
@@ -70,6 +69,28 @@ class RestaurantsController
         //dump($this->request->getCurrentRequest()->query->get('city'));
         return new Response($this->twig->render('site/restaurantsByCity.html.twig',[
             //'categories' => $categoryRepository->findAll()
+            'city' => $this->cityRepository->findBy(['name' => $city])[0]
+        ]));
+    }
+
+    /**
+     * @Route ("restaurant/{city}/{restaurant}", name="restaurant_show")
+     * @param $city
+     * @param $restaurant
+     * @param RestaurantRepository $restaurantRepository
+     * @return Response
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function showRestaurant($city, $restaurant, RestaurantRepository $restaurantRepository): Response
+    {
+        dump($restaurant);
+        dump($city);
+        //dump($this->request->getCurrentRequest()->query->get('city'));
+        return new Response($this->twig->render('site/restaurant.html.twig',[
+            'city' => $this->cityRepository->findBy(['name' => $city])[0],
+            'restaurant' => $this->restaurantRepository->findBy(['name' => $restaurant])[0]
         ]));
     }
 }
