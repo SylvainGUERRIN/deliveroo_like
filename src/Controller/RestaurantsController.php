@@ -25,6 +25,7 @@ class RestaurantsController
     private $security;
     private $session;
     private $cityRepository;
+    private $restaurantRepository;
 
     /**
      * BikerController constructor.
@@ -35,6 +36,7 @@ class RestaurantsController
      * @param Security $security
      * @param SessionInterface $session
      * @param CityRepository $cityRepository
+     * @param RestaurantRepository $restaurantRepository
      */
     public function __construct(
         Environment $twig,
@@ -43,7 +45,8 @@ class RestaurantsController
         ManagerRegistry $registry,
         Security $security,
         SessionInterface $session,
-        CityRepository $cityRepository
+        CityRepository $cityRepository,
+        RestaurantRepository $restaurantRepository
     )
     {
         $this->twig = $twig;
@@ -53,6 +56,7 @@ class RestaurantsController
         $this->security = $security;
         $this->session = $session;
         $this->cityRepository = $cityRepository;
+        $this->restaurantRepository = $restaurantRepository;
     }
 
     /**
@@ -65,11 +69,15 @@ class RestaurantsController
      */
     public function restaurantsByCity($city): Response
     {
-        dump($city);
+        //dump($city);
+        $cityForRestaurants = $this->cityRepository->findBy(['name' => $city])[0];
+//        dump($this->restaurantRepository->findBy(['city' => $cityForRestaurants]));
+//        dd($cityForRestaurants);
         //dump($this->request->getCurrentRequest()->query->get('city'));
         return new Response($this->twig->render('site/restaurantsByCity.html.twig',[
             //'categories' => $categoryRepository->findAll()
-            'city' => $this->cityRepository->findBy(['name' => $city])[0]
+            'city' => $cityForRestaurants,
+            'restaurants' => $this->restaurantRepository->findBy(['city' => $cityForRestaurants])
         ]));
     }
 
@@ -77,13 +85,12 @@ class RestaurantsController
      * @Route ("restaurant/{city}/{restaurant}", name="restaurant_show")
      * @param $city
      * @param $restaurant
-     * @param RestaurantRepository $restaurantRepository
      * @return Response
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function showRestaurant($city, $restaurant, RestaurantRepository $restaurantRepository): Response
+    public function showRestaurant($city, $restaurant): Response
     {
         dump($restaurant);
         dump($city);

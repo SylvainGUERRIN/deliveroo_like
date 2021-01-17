@@ -12,46 +12,45 @@
 {% block body %}
     <div class="container-fluid mt-5 mb-5">
         <div class="row">
-            <div class="col-3">
+            <div class="col-sm-12 col-md-3">
                 <p>ajouter filtres (catégories, tri (distance, mieux noté, recommandations, heure))</p>
             </div>
-            <div class="col-9">
-                {#                4 cartes par lignes#}
+            <div class="col-sm-12 col-md-9">
                 <div class="row">
-                    <div class="col-3">
-                        <div class="card" style="width: 100%;">
-                            <a href="#">
-                                <div class="delivery">
-                                    <p>
-                                        Livraison <br>
-                                        gratuite
-                                    </p>
-                                </div>
-                                <img src="{{ asset('assets/images/restaurants/resto-1.jpg') }}" class="card-img-top" alt="...">
-                                <div class="preco">
-                                    <p>Précommande</p>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Nom du resto</h5>
-                                    <p class="card-text">
-                                        avis
-                                    </p>
-                                    <p class="card-text">
-                                        distance - livraison
-                                    </p>
-                                </div>
-                            </a>
+
+                    {% for restaurant in restaurants %}
+                        <div class="col-sm-12 col-lg-6 col-xl-3">
+                            <div class="card" style="width: 100%;">
+                                <a href="{{ path('restaurant_show', {city: city.name, restaurant: restaurant.name}) }}">
+                                    <div class="delivery">
+                                        <p>
+                                            Livraison <br>
+                                            gratuite
+                                        </p>
+                                    </div>
+                                    <img src="{{ asset('assets/images/restaurants/resto-1.jpg') }}" class="card-img-top" alt="...">
+                                    <div class="preco">
+                                        <small>
+                                            Pré-commande
+                                        </small>
+                                        <span>
+                                            <strong>{{ restaurant.opensAt|date('H:s') }} - {{ restaurant.closesAt|date('H:s') }}</strong>
+                                        </span>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ restaurant.name }}</h5>
+                                        <p class="card-text">
+                                            avis
+                                        </p>
+                                        <p class="card-text">
+                                            à 2 km - livraison
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-3">
+                    {% endfor %}
 
-                    </div>
-                    <div class="col-3">
-
-                    </div>
-                    <div class="col-3">
-
-                    </div>
                 </div>
             </div>
         </div>
