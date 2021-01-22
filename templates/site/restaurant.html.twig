@@ -3,20 +3,272 @@
 {% block title %}Restaurant {{ restaurant.name }} - Deliveroo_like{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('site/css/restaurant.css') }}">
+    <link rel="stylesheet" href="{{ asset('site/css/restaurant-show.css') }}">
     {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">#}
     {#    <link rel="stylesheet"#}
     {#          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">#}
 {% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-3">
-
-            </div>
+    <div class="container mt-5 mb-5">
+        <div class="row presentation-restaurant">
             <div class="col-9">
-
+                <h1>Nom du restaurant</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, dolor ea et, eum eveniet illum,
+                    in itaque mollitia praesentium qui quisquam quo quos ratione similique sit. Ea ex minus unde.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, dolor ea et, eum eveniet illum,
+                    in itaque mollitia praesentium qui quisquam quo quos ratione similique sit. Ea ex minus unde.
+                </p>
+            </div>
+            <div class="col-3">
+                <img src="{{ asset('assets/images/restaurants/resto-1.jpg') }}" alt="">
+            </div>
+        </div>
+        <div class="row mt-5 mb-3">
+            <ul id="nav-orders" class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#formulae">Formules</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#burgers">Burgers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#salads">Salades</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#hungry">P'tites Faims</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container" data-spy="scroll" data-target="#nav-orders" data-offset="0">
+        <div id="formulae" class="row">
+            <div class="col-12">
+                <h3>Formules</h3>
+            </div>
+            <div class="col-9 orders">
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="burgers" class="row">
+            <div class="col-12">
+                <h3>Burgers</h3>
+            </div>
+            <div class="col-9 orders">
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="salads" class="row">
+            <div class="col-12">
+                <h3>Salades</h3>
+            </div>
+            <div class="col-9 orders">
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="hungry" class="row">
+            <div class="col-12">
+                <h3>P'tites Faims</h3>
+            </div>
+            <div class="col-9 orders">
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
+                <div class="order">
+                    <div class="txt">
+                        <h5>The formule</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet. <br>
+                            Consectetur adipisicing elit.
+                        </p>
+                        <span>12,20 €</span>
+                    </div>
+                    <img src="{{ asset('assets/images/restaurant-menus/menu.jpg') }}" alt="">
+                </div>
             </div>
         </div>
     </div>
