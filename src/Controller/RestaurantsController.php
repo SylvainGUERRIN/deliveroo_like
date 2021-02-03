@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Data\SortingData;
+use App\Form\SortingType;
 use App\Repository\CityRepository;
 use App\Repository\RestaurantRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -74,10 +77,19 @@ class RestaurantsController
 //        dump($this->restaurantRepository->findBy(['city' => $cityForRestaurants]));
 //        dd($cityForRestaurants);
         //dump($this->request->getCurrentRequest()->query->get('city'));
+
+        $data = new SortingData();
+        $data->page = $this->request->getCurrentRequest()->get('page', 1);
+//        $data->page = $request->get('page', 1);
+        $form = $this->form->create(SortingType::class, $data);
+
+        $form->handleRequest($this->request->getCurrentRequest());
+
         return new Response($this->twig->render('site/restaurantsByCity.html.twig',[
             //'categories' => $categoryRepository->findAll()
             'city' => $cityForRestaurants,
-            'restaurants' => $this->restaurantRepository->findBy(['city' => $cityForRestaurants])
+            'restaurants' => $this->restaurantRepository->findBy(['city' => $cityForRestaurants]),
+            'form' => $form->createView()
         ]));
     }
 
