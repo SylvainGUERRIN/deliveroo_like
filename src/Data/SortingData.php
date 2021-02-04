@@ -21,14 +21,14 @@ class SortingData
      */
     public array $categories = [];
 
-    /**
-     * @var null|integer
-     */
-    public ?int $min;
-
-    /**
-     * @var null|integer
-     */
-    public ?int $max;
+//    /**
+//     * @var null|integer
+//     */
+//    public ?int $min;
+//
+//    /**
+//     * @var null|integer
+//     */
+//    public ?int $max;
 
 }

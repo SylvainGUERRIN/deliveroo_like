@@ -85,10 +85,17 @@ class RestaurantsController
 
         $form->handleRequest($this->request->getCurrentRequest());
 
+        if($form->isSubmitted() && $form->isValid()){
+            $restaurants = $this->restaurantRepository->findSortingData($data);
+        }else{
+            $restaurants = $this->restaurantRepository->findBy(['city' => $cityForRestaurants]);
+        }
+
         return new Response($this->twig->render('site/restaurantsByCity.html.twig',[
             //'categories' => $categoryRepository->findAll()
             'city' => $cityForRestaurants,
-            'restaurants' => $this->restaurantRepository->findBy(['city' => $cityForRestaurants]),
+            'restaurants' => $restaurants,
+//            'restaurants' => $this->restaurantRepository->findBy(['city' => $cityForRestaurants]),
             'form' => $form->createView()
         ]));
     }
