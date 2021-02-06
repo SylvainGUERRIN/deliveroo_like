@@ -54,7 +54,19 @@ class SiteController
     }
 
     /**
-     * @Route("/", name="contact")
+     * @Route ("/carrieres", name="careers")
+     * @return Response
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function careers(): Response
+    {
+        return new Response($this->twig->render('site/careers.html.twig'));
+    }
+
+    /**
+     * @Route("/contact", name="contact")
      * @return Response
      * @throws LoaderError
      * @throws RuntimeError

@@ -12,9 +12,9 @@ class SortingData
     public int $page = 1;
 
     /**
-     * @var string
+     * @var null|string
      */
-    public string $q = '';
+    public ?string $q = '';
 
     /**
      * @var Category[]

@@ -46,10 +46,11 @@ class RestaurantRepository extends ServiceEntityRepository
     private function getSortingQuery(SortingData $sortingData): QueryBuilder
     {
         $query = $this->createQueryBuilder('r')
-            ->select('c', 'r');
+            ->select('c','r')
+            ->join('r.category', 'c');
         if(!empty($sortingData->q)){
             $query = $query
-                ->andWhere('p.name LIKE :q')
+                ->andWhere('r.name LIKE :q')
                 ->setParameter('q', "%{$sortingData->q}%");
         }
         if(!empty($search->categories)){

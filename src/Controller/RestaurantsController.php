@@ -86,7 +86,9 @@ class RestaurantsController
         $form->handleRequest($this->request->getCurrentRequest());
 
         if($form->isSubmitted() && $form->isValid()){
+            //dd($data);
             $restaurants = $this->restaurantRepository->findSortingData($data);
+            //dd($restaurants);
         }else{
             $restaurants = $this->restaurantRepository->findBy(['city' => $cityForRestaurants]);
         }
