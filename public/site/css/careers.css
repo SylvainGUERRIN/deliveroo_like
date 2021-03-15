@@ -24,3 +24,8 @@
     left: 0;
     z-index: 1;
 }
+
+/* discover teams */
+.discover-teams .txt{
+    width: 49%;
+}

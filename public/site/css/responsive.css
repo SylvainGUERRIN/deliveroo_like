@@ -7,3 +7,10 @@
         margin: 2% 0;
     }
 }
+
+@media screen and (max-width: 768px){
+    /* page careers */
+    .discover-teams .txt{
+        width: 100%;
+    }
+}

@@ -20,12 +20,12 @@ a:hover{
     color: #00ccbc;
     text-decoration: none;
 }
-::-moz-selection {
-    background: #00ccbc;
-}
-::selection {
-    background: #00ccbc;
-}
+/*::-moz-selection {*/
+/*    background: #00ccbc;*/
+/*}*/
+/*::selection {*/
+/*    background: #00ccbc;*/
+/*}*/
 .bold-span{
     font-weight: 700;
     letter-spacing: 0.05em;
@@ -37,11 +37,12 @@ a:hover{
 
 /* navbar */
 .navbar{
-    z-index: 2;
+    z-index: 3;
+    background-color: #585a5a;
 }
 .navbar-head{
     /*background-color: #00ccbc !important;*/
-    z-index: 2;
+    z-index: 3;
     position: sticky;
     top: 0;
 }
