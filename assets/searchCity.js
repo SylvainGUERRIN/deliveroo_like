@@ -1,3 +1,5 @@
+
+//not css import, just js
 $(document).ready(function () {
     let fieldCity = document.getElementById('get_city_cityName')
     let fieldZip = document.getElementById('zip-code')
@@ -96,45 +98,45 @@ $(document).ready(function () {
 
             //console.log(fieldCity.value)
             $.ajax({
-                    url: '/city-search',
-                    type: 'POST',
-                    data: {value: fieldCity.value},
-                    dataType: 'json',
-                    async: true,
+                url: '/city-search',
+                type: 'POST',
+                data: {value: fieldCity.value},
+                dataType: 'json',
+                async: true,
 
-                    success: function (data) {
-                        //console.log(data[0])
-                        //city list
-                        let cityList = data[0]
+                success: function (data) {
+                    //console.log(data[0])
+                    //city list
+                    let cityList = data[0]
 
-                        //create ul
-                        let ul = document.createElement('ul')
-                        ul.setAttribute('id','cityList')
+                    //create ul
+                    let ul = document.createElement('ul')
+                    ul.setAttribute('id','cityList')
 
-                        // document.body.appendChild()
-                        divRenderList.appendChild(ul)
+                    // document.body.appendChild()
+                    divRenderList.appendChild(ul)
 
-                        //foreach to fill each li
-                        cityList.forEach(renderCitiesList)
+                    //foreach to fill each li
+                    cityList.forEach(renderCitiesList)
 
-                        function renderCitiesList(element, index, arr){
-                            let li = document.createElement('li')
-                            li.setAttribute('class', 'item')
-                            ul.appendChild(li)
+                    function renderCitiesList(element, index, arr){
+                        let li = document.createElement('li')
+                        li.setAttribute('class', 'item')
+                        ul.appendChild(li)
 
-                            let button = document.createElement('button')
-                            button.setAttribute('class', 'btn btn-blue city-name')
-                            let cityName = element[0]
-                            button.setAttribute('id', cityName + '-' + element[1])
-                            li.appendChild(button)
+                        let button = document.createElement('button')
+                        button.setAttribute('class', 'btn btn-blue city-name')
+                        let cityName = element[0]
+                        button.setAttribute('id', cityName + '-' + element[1])
+                        li.appendChild(button)
 
-                            // let t = document.createTextNode(element)
-                            //console.log(element)
-                            // console.log(t)
+                        // let t = document.createTextNode(element)
+                        //console.log(element)
+                        // console.log(t)
 
-                            button.innerHTML = button.innerHTML + element
-                        }
+                        button.innerHTML = button.innerHTML + element
                     }
+                }
             })
         }
     })

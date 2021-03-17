@@ -1,0 +1,176 @@
+/* section intro */
+.intro-home::before{
+  content: "";
+  width: 100%;
+  height: 256px;
+  position: absolute;
+  /*right: 0;*/
+  top: 0;
+  background-color: #00ccbc;
+  -webkit-transform: skewY(-4deg);
+  transform: skewY(-4deg);
+  -webkit-transform-origin: left;
+  transform-origin: left;
+  /*z-index: -1;*/
+}
+.intro-home{
+  margin-top: 3%;
+  background-color: #d0eb99;
+  z-index: -1;
+}
+.intro-home h1{
+  color: #440063;
+}
+.intro-home img{
+  max-height: 400px;
+  width: 100%;
+  border-radius: 5px;
+}
+/*.image-promo{*/
+/*    width: 100%;*/
+/*    height: auto;*/
+/*    !*position: absolute;*!*/
+/*    !*right: 0;*!*/
+/*    !*background-image: url(https://cwa.roocdn.com/_next/static/campaign.5add8e18.svg);*!*/
+/*    background-image: url('../../assets/images/brandable-box.jpg');*/
+/*    !*background-position: calc(50% + 300px) calc(30% + 90px);*!*/
+/*    background-repeat: no-repeat;*/
+/*}*/
+.form-search{
+  padding: 3%;
+  background-color: #ffffff;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 2px 9px 0 rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 2px 9px 0 rgba(0,0,0,0.75);
+  box-shadow: 2px 2px 9px 0 rgba(0,0,0,0.75);
+}
+.field-search{
+  position: relative;
+}
+.field-search svg{
+  position: absolute;
+  top: 6px;
+  right: 25px;
+  fill: #00ccbc;
+}
+
+/* sections food */
+.background-img{
+  width: 100%;
+  height: 150px;
+  position: relative;
+  opacity: 0.9;
+}
+.bold-span{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+}
+.affair{
+  background: url("../../../../public/assets/images/accueil/alexandr-podvalny-WOxddhzhC1w-unsplash.jpg") 50% / cover no-repeat;
+}
+.confort{
+  background: url("../../../../public/assets/images/accueil/amirali-mirhashemian-sc5sTPMrVfk-unsplash.jpg") 50% / cover no-repeat;
+}
+.balanced{
+  background: url("../../../../public/assets/images/accueil/chad-montano-MqT0asuoIcU-unsplash.jpg") 50% / cover no-repeat;
+}
+.small-pleasure{
+  background: url("../../../../public/assets/images/accueil/dan-gold-4_jhDO54BYg-unsplash.jpg") 50% / cover no-repeat;
+}
+
+/* sections places */
+.places{
+  background-color: #ffeae4;
+}
+
+/* section categories */
+.categories a{
+  color: #000000;
+  font-size: 28px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+}
+.categories a:hover{
+  opacity: .5;
+}
+.categories li{
+  display: inline-flex;
+  margin: 2%;
+  padding: 1%;
+  background-color: #f9fafa;
+  border-radius: 10px;
+}
+
+/* sections work with */
+.business-img img{
+  max-height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+.business-text-after::after{
+  content: '';
+  width: 40px;
+  height: 110%;
+  background: #fff;
+  -webkit-transform: rotate(6deg);
+  transform: rotate(6deg);
+  position: absolute;
+  left: -40px;
+  top: -10px;
+  z-index: 1;
+}
+.business-text-before::before{
+  content: '';
+  width: 40px;
+  height: 110%;
+  background: #fff;
+  -webkit-transform: rotate(6deg);
+  transform: rotate(6deg);
+  position: absolute;
+  right: -40px;
+  top: -10px;
+  z-index: 1;
+}
+
+/* section work with us */
+.card{
+  border: none!important;
+  /*background-color: #ff483b;*/
+  color: #ffffff;
+}
+.card-orange, .card-orange .card-title::before{
+  background-color: #ff483b;
+}
+.card-yellow, .card-yellow .card-title::before{
+  background-color: #ff8100;
+}
+.card-grey, .card-grey .card-title::before{
+  background-color: #bac3c3;
+}
+.card-img-top{
+  height: 250px;
+  object-fit: cover;
+}
+.card-body{
+  position: relative;
+}
+.card-title{
+  z-index: 2;
+  margin-top: 20px;
+}
+.card-title::before{
+  content: '';
+  width: 100%;
+  height: 35px;
+  clip-path: polygon(100% 5%, 0% 100%, 100% 100%);
+  /*background: #ff483b;*/
+  /*-webkit-transform: rotate(-6deg);*/
+  /*transform: rotate(-6deg);*/
+  position: absolute;
+  top: -35px;
+  left: 0;
+  z-index: 1;
+}
