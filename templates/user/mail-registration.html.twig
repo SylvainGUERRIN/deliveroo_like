@@ -3,7 +3,8 @@
 {% block title %}Connexion - Deliveroo_like{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('site/css/registration.css') }}">
+{#    <link rel="stylesheet" href="{{ asset('site/css/registration.css') }}">#}
+    {{ encore_entry_link_tags('user-registration') }}
 {% endblock %}
 
 {% block body %}

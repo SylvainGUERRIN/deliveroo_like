@@ -2,7 +2,8 @@
 {% block title %}Roulez avec nous ! - Deliveroo-like{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('site/css/biker/registration.css') }}">
+{#    <link rel="stylesheet" href="{{ asset('site/css/biker/registration.css') }}">#}
+    {{ encore_entry_link_tags('biker-registration') }}
 {% endblock %}
 
 {% block body %}

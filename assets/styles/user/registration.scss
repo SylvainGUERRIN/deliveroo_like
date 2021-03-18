@@ -1,0 +1,35 @@
+.registration{
+  max-width: 50%;
+  margin: 0 auto;
+}
+.registration a{
+  margin: 5% 0;
+}
+.registration p a{
+  color: #00ccbc;
+}
+.registration p a:hover{
+  color: #01433e;
+}
+.limiter{
+  padding: 2% 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  margin: 0 auto;
+}
+.or:before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 0;
+  opacity: 0.24;
+  border-bottom: 1px solid #8c9b9b;
+}
+.or{
+  background-color: #ffffff;
+  text-align: center;
+}

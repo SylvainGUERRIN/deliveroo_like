@@ -26,6 +26,9 @@ Encore
     .addEntry('searchCity', './assets/searchCity.js')
     .addEntry('restaurantShow', './assets/restaurant-show.js')
     .addEntry('restaurant', './assets/restaurant.js')
+    .addEntry('user-registration', './assets/user/registration.js')
+    .addEntry('owner-registration', './assets/owner/registration.js')
+    .addEntry('biker-registration', './assets/biker/registration.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

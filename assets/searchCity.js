@@ -1,5 +1,6 @@
+// any SCSS you import will output into a single scss file (app.scss in this case)
+import './styles/layout/search-city.scss';
 
-//not css import, just js
 $(document).ready(function () {
     let fieldCity = document.getElementById('get_city_cityName')
     let fieldZip = document.getElementById('zip-code')

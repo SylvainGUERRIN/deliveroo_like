@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
-    <link rel="stylesheet" href="{{ asset('site/css/owner/registration-owner.css') }}">
+{#    <link rel="stylesheet" href="{{ asset('site/css/owner/registration-owner.css') }}">#}
+    {{ encore_entry_link_tags('owner-registration') }}
 {% endblock %}
 
 {% block body %}
@@ -280,5 +281,6 @@
 
 {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="{{ asset('site/js/owner/registration-owner.js') }}"></script>
+{#    <script src="{{ asset('site/js/owner/registration-owner.js') }}"></script>#}
+    {{ encore_entry_script_tags('owner-registration') }}
 {% endblock %}
