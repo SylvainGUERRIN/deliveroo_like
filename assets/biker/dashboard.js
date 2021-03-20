@@ -1,3 +1,4 @@
+//no css import
 
 //do with this or get biker city to display weather ?
 function geoLocalization(){

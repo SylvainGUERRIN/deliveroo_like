@@ -127,5 +127,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('biker/js/dashboard.js') }}"></script>
+{#    <script src="{{ asset('biker/js/dashboard.js') }}"></script>#}
+    {{ encore_entry_script_tags('biker-dashboard') }}
 {% endblock %}
