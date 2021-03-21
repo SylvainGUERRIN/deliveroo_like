@@ -29,14 +29,14 @@
 }
 .img-punchline{
   position: relative;
-  background: url("../../../public/assets/images/bikers/the-ride-academy.jpg") center center / cover no-repeat;
+  background: url("./../../content/images/bikers/the-ride-academy.jpg") center center / cover no-repeat;
   height: 400px;
 }
 
 /* choice*/
 .choice{
   padding: 5% 0;
-  background-image: url("../../../public/assets/icones/donut.svg"),url('../../../public/assets/icones/ramen.svg');
+  background-image: url("./../../content/icones/donut.svg"),url('./../../content/icones/ramen.svg');
   background-position: top left, bottom right;
   background-repeat: no-repeat;
 }
@@ -141,7 +141,7 @@
 }
 .access li{
   margin-bottom: 10px;
-  background: url("../../../public/assets/icones/tick_check.svg") no-repeat;
+  background: url("./../../content/icones/tick_check.svg") no-repeat;
   padding-left: 40px;
 }
 
@@ -154,7 +154,7 @@
 }
 .citation-img{
   position: relative;
-  background: url("../../../public/assets/images/bikers/the-ride-academy.jpg") center center / cover no-repeat;
+  background: url("./../../content/images/bikers/the-ride-academy.jpg") center center / cover no-repeat;
   height: 400px;
 }
 .citation-img:after{

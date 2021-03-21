@@ -27,7 +27,7 @@
   /*min-height: 500px;*/
   /*width: 100%;*/
   background:
-          url('../../../public/assets/images/owner/registration/blue-background.svg')
+          url('./../../content/images/owner/registration/blue-background.svg')
           top right / cover no-repeat;
   /*background:*/
   /*        url('data:image/svg+xml;utf8,<svg width="1121" height="630" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M.5 710l817.07-326.926L708.082 0H1120.5v630H.5z" fill="%2300CCBC"/></svg>')*/
@@ -90,7 +90,7 @@
   content: '';
   width: 40px;
   height: 32px;
-  background: url("../../../public/assets/images/owner/registration/partnership-slider/left-quote.svg") center center / contain no-repeat;
+  background: url("./../../content/images/owner/registration/partnership-slider/left-quote.svg") center center / contain no-repeat;
   position: absolute;
   /*top: 0;*/
   top: 30%;
@@ -121,7 +121,7 @@
   content: '';
   width: 23px;
   height: 23px;
-  background: url("../../../public/assets/images/owner/registration/icons/checked.svg") no-repeat;
+  background: url("./../../content/images/owner/registration/icons/checked.svg") no-repeat;
   background-size: contain;
 }
 
