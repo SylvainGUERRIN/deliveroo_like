@@ -45,6 +45,8 @@ Encore
     .addEntry('biker-dashboard', './assets/biker/dashboard.js')
     .addEntry('biker-presentation', './assets/biker/presentation.js')
 
+    .addEntry('admin-global', './assets/admin/global.js')
+
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
 

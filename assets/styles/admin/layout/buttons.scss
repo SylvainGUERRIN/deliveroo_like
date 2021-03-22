@@ -1,0 +1,30 @@
+/* buttons */
+.btn{
+  display: flex!important;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.btn-white{
+  background-color: #ffffff;
+  border: 1px solid #838686;
+  border-radius: 5px;
+  color: #838686;
+}
+.btn-white:hover{
+  border-color: #2a2f2f;
+}
+.btn-white:hover .fa-home, .btn-white:hover .fa-hamburger{
+  color: #018177;
+}
+.btn-blue{
+  background-color: #00ccbc;
+  border: 1px solid #00ccbc;
+  border-radius: 5px;
+  color: #ffffff;
+}
+.btn-blue:hover{
+  background-color: #01433e;
+  border-color: #01433e;
+  color: #ffffff;
+}

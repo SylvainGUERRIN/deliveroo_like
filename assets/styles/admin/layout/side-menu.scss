@@ -1,0 +1,77 @@
+/* sidebar to right */
+/*remove wrapper ?*/
+.wrapper {
+  display: block;
+}
+
+#sidebar {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  right: -250px;
+  height: 100vh;
+  z-index: 999;
+  background: #00ccbc;
+  color: #fff;
+  transition: all 0.3s;
+  overflow: hidden;
+  /*overflow-y: scroll;*/
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+#sidebar .sidebar-header {
+  padding: 65px 35px 45px 35px;
+  background: #02998d;
+}
+#sidebar.active{
+  right: 0;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  /* full screen */
+  width: 100vw;
+  height: 100vh;
+  /* transparent black */
+  background: rgba(0, 0, 0, 0.7);
+  /* middle layer, i.e. appears below the sidebar */
+  z-index: 998;
+  opacity: 0;
+  /* animate the transition */
+  transition: all 0.5s ease-in-out;
+}
+/* display .overlay when it has the .active class */
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+#dismiss {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background: #026b62;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#sidebar ul{
+  padding-top: 5%;
+}
+#sidebar ul li{
+  padding: 2%;
+}
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+  color: #fff;
+  background: #026b62;
+}
+/*#sidebar ul li a {*/
+/*    padding: 10px;*/
+/*    font-size: 1.1em;*/
+/*    display: block;*/
+/*}*/

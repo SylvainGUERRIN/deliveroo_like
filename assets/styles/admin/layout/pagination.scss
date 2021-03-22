@@ -1,0 +1,12 @@
+/*pagination*/
+.nav-pagination{
+  display: flex;
+  justify-content: center;
+}
+.pagination a{
+  color: #000000 !important;
+}
+.page-item.active .page-link{
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}
